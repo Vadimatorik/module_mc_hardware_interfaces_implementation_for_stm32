@@ -1,15 +1,17 @@
-/*!
- *	@startuml
- *
- *	class GlobalPort {
- *		{field}-	const PinCfg*			const cfg
- *		{field}-	const uint32_t			cfgCount
- *		__Constructor__
- *		{method}+	GlobalPort	( const PinCfg*	const cfg,\n\t\t  uint32_t		cfgCount )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class GlobalPort {
+	{field}-	const PinCfg*			const cfg
+	{field}-	const uint32_t			cfgCount
+	__Constructor__
+	{method}+	GlobalPort	( const PinCfg*	const cfg,\n\t\t  uint32_t		cfgCount )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

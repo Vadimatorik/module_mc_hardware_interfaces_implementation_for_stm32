@@ -1,16 +1,18 @@
-/*!
- * @startuml
- *
- *	class TimCompOneChannel {
- *		{field}-	const TimCompOneChannelCfg*	const cfg
- *		{field}-	TIM_HandleTypeDef			tim
- *		{field}-	TIM_OC_InitTypeDef			timCh
- *		__Constructor__
- *		{method}+	TimCompOneChannel	( const TimCompOneChannelCfg*	const cfg )
- *	}
- *
- * @enduml
- */
+/*
+
+@startuml
+
+class TimCompOneChannel {
+	{field}-	const TimCompOneChannelCfg*	const cfg
+	{field}-	TIM_HandleTypeDef			tim
+	{field}-	TIM_OC_InitTypeDef			timCh
+	__Constructor__
+	{method}+	TimCompOneChannel	( const TimCompOneChannelCfg*	const cfg )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

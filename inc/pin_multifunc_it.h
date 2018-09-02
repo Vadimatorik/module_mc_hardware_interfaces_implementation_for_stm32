@@ -1,14 +1,16 @@
-/*!
- *	@startuml
- *
- *	class PinMultifuncIt {
- *		{field}-	const uint32_t			exitPin
- *		__Constructor__
- *		{method}+	PinMultifuncIt\t( const PinCfg*\t\tconst cfg,\n\t\t\t  uint32_t\t\t\tcfgCount,\n\t\t\t  uint32_t\t\t\texitPin )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class PinMultifuncIt {
+	{field}-	const uint32_t			exitPin
+	__Constructor__
+	{method}+	PinMultifuncIt\t( const PinCfg*\t\tconst cfg,\n\t\t\t  uint32_t\t\t\tcfgCount,\n\t\t\t  uint32_t\t\t\texitPin )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

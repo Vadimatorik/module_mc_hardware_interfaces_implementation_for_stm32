@@ -1,15 +1,17 @@
-/*!
- * @startuml
- *
- *	class TimInterrupt {
- *		{field}-	const TimInterruptCfg*			const cfg
- *		{field}-	TIM_HandleTypeDef				tim
- *		__Constructor__
- *		{method}+	TimInterrupt	( const TimInterruptCfg*	const cfg )
- *	}
- *
- * @enduml
- */
+/*
+
+@startuml
+
+class TimInterrupt {
+	{field}-	const TimInterruptCfg*			const cfg
+	{field}-	TIM_HandleTypeDef				tim
+	__Constructor__
+	{method}+	TimInterrupt	( const TimInterruptCfg*	const cfg )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

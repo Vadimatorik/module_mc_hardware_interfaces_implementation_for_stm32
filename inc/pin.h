@@ -1,14 +1,16 @@
-/*!
- *	@startuml
- *
- *	class Pin {
- *		{field}-	const PinCfg*		const cfg;
- *		__Constructor__
- *		{method}+	Pin	( const PinCfg*	const cfg )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class Pin {
+	{field}-	const PinCfg*		const cfg;
+	__Constructor__
+	{method}+	Pin	( const PinCfg*	const cfg )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

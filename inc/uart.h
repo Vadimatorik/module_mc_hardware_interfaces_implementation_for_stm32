@@ -1,27 +1,29 @@
-/*!
- *	@startuml
- *
- *	class Uart {
- *		{field}-	const UartCfg*						const cfg
- *		{field}-	const uint32_t						cfgCount
- *		{field}-	DMA_HandleTypeDef					dmaTx
- *		{field}-	UART_HandleTypeDef					uart
- *		{field}-	USER_OS_STATIC_BIN_SEMAPHORE		s
- *		{field}-	USER_OS_STATIC_MUTEX				m
- *		{field}-	USER_OS_STATIC_BIN_SEMAPHORE_BUFFER	sb
- *		{field}-	USER_OS_STATIC_MUTEX_BUFFER			mb
- *		__Constructor__
- *		{method}+	Uart	( const UartCfg*		const cfg,\n\t  uint32_t			cfgCount	= 1 )
- *		__Public methods__
- *		{method}+	void	irqHandler			( void )
- *		{method}+	void	giveSemaphore		( void )
- *		__Private methods__
- *		{method}-	bool 	clkInit			( void )
- *		{method}-	bool	clkDeinit			( void )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class Uart {
+	{field}-	const UartCfg*						const cfg
+	{field}-	const uint32_t						cfgCount
+	{field}-	DMA_HandleTypeDef					dmaTx
+	{field}-	UART_HandleTypeDef					uart
+	{field}-	USER_OS_STATIC_BIN_SEMAPHORE		s
+	{field}-	USER_OS_STATIC_MUTEX				m
+	{field}-	USER_OS_STATIC_BIN_SEMAPHORE_BUFFER	sb
+	{field}-	USER_OS_STATIC_MUTEX_BUFFER			mb
+	__Constructor__
+	{method}+	Uart	( const UartCfg*		const cfg,\n\t  uint32_t			cfgCount	= 1 )
+	__Public methods__
+	{method}+	void	irqHandler			( void )
+	{method}+	void	giveSemaphore		( void )
+	__Private methods__
+	{method}-	bool 	clkInit			( void )
+	{method}-	bool	clkDeinit			( void )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

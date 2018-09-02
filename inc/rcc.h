@@ -1,16 +1,18 @@
-/*!
- *	@startuml
- *
- *	class AdcOneChannel {
- *		{field}-	const RccCfg*				const cfg
- *		{field}-	const uint32_t				cfgCount
- *		{field}-	int						cfgNumberSet
- *		__Constructor__
- *		{method}+	Rcc	( const RccCfg*		const cfg,\n\t  uint32_t			cfgCount )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class Rcc {
+	{field}-	const RccCfg*				const cfg
+	{field}-	const uint32_t				cfgCount
+	{field}-	int						cfgNumberSet
+	__Constructor__
+	{method}+	Rcc	( const RccCfg*		const cfg,\n\t  uint32_t			cfgCount )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

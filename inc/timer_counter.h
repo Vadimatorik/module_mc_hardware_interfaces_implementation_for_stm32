@@ -1,16 +1,18 @@
-/*!
- * @startuml
- *
- *	class TimCounter {
- *		{field}-	const ClkTimBaseCfg*		const cfg
- *		{field}-	TIM_HandleTypeDef		tim
- *
- *		__Constructor__
- *		{method}+	TimCounter	( const ClkTimBaseCfg*	const cfg )
- *	}
- *
- * @enduml
- */
+/*
+
+@startuml
+
+class TimCounter {
+	{field}-	const ClkTimBaseCfg*		const cfg
+	{field}-	TIM_HandleTypeDef		tim
+
+	__Constructor__
+	{method}+	TimCounter	( const ClkTimBaseCfg*	const cfg )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

@@ -1,22 +1,24 @@
-/*!
- *	@startuml
- *
- *	class AdcOneChannel {
- *		{field}-	const AdcOneChannelCfg*		const cfg
- *		{field}-	const uint32_t				cfgCount
- *		{field}-	ADC_HandleTypeDef			adc
- *		{field}-	ADC_ChannelConfTypeDef		channelCfg
- *		__Constructor__
- *		{method}+	AdcOneChannel	( const AdcOneChannelCfg*		const cfg,\n\t\t\t  uint32_t\t\t\t\t\tcountCfg )
- *		__Public methods__
- *		{method}+	void	irqHandler		( void )
- *		__Private methods__
- *		{method}-	void	clkEnable		( void )
- *		{method}-	void	clkDisable		( void )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class AdcOneChannel {
+	{field}-	const AdcOneChannelCfg*		const cfg
+	{field}-	const uint32_t				cfgCount
+	{field}-	ADC_HandleTypeDef			adc
+	{field}-	ADC_ChannelConfTypeDef		channelCfg
+	__Constructor__
+	{method}+	AdcOneChannel	( const AdcOneChannelCfg*		const cfg,\n\t\t\t  uint32_t\t\t\t\t\tcountCfg )
+	__Public methods__
+	{method}+	void	irqHandler		( void )
+	__Private methods__
+	{method}-	void	clkEnable		( void )
+	{method}-	void	clkDisable		( void )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

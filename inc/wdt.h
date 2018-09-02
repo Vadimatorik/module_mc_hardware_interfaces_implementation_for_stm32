@@ -1,21 +1,23 @@
-/*!
- *	@startuml
- *
- *	class Wdt {
- *		{field}-	const WdtCfg*					const cfg
- *		{field}-	const uint32_t					cfgCount
- *		{field}-	uint32_t						cfgNow
- *		{field}-	USER_OS_STATIC_STACK_TYPE		taskStack[ 64 ]
- *		{field}-	USER_OS_STATIC_TASK_STRUCT_TYPE	taskStruct
- *		{field}-	uint8_t						reboot
- *		__Constructor__
- *		{method}+	Wdt ( const WdtCfg*		const cfg,\n\tuint32_t			cfgCount = 1 )
- *		__Private methods__
- *		{method}{static}-	void	task	( void*	obj )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class Wdt {
+	{field}-	const WdtCfg*					const cfg
+	{field}-	const uint32_t					cfgCount
+	{field}-	uint32_t						cfgNow
+	{field}-	USER_OS_STATIC_STACK_TYPE		taskStack[ 64 ]
+	{field}-	USER_OS_STATIC_TASK_STRUCT_TYPE	taskStruct
+	{field}-	uint8_t						reboot
+	__Constructor__
+	{method}+	Wdt ( const WdtCfg*		const cfg,\n\tuint32_t			cfgCount = 1 )
+	__Private methods__
+	{method}{static}-	void	task	( void*	obj )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

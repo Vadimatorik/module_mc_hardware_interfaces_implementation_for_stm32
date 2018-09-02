@@ -1,17 +1,19 @@
-/*!
- * @startuml
- *
- *	class TimPwmOneChannel {
- *		{field}-	const TimPwmOneChannelCfg*		const cfg
- *		{field}-	TIM_HandleTypeDef				tim
- *		{field}-	TIM_OC_InitTypeDef				timChannel
- *
- *		__Constructor__
- *		{method}+	TimPwmOneChannel	( const TimPwmOneChannelCfg*	const cfg )
- *	}
- *
- * @enduml
- */
+/*
+
+@startuml
+
+class TimPwmOneChannel {
+	{field}-	const TimPwmOneChannelCfg*		const cfg
+	{field}-	TIM_HandleTypeDef				tim
+	{field}-	TIM_OC_InitTypeDef				timChannel
+
+	__Constructor__
+	{method}+	TimPwmOneChannel	( const TimPwmOneChannelCfg*	const cfg )
+}
+
+@enduml
+
+*/
 
 #pragma once
 

@@ -1,20 +1,22 @@
-/*!
- *	@startuml
- *
- *	class Dac {
- *		{field}-	const DacCfg*				const cfg
- *		{field}-	const uint32_t				cfgCount
- *		{field}-	DAC_HandleTypeDef			dac
- *		{field}-	DAC_ChannelConfTypeDef		dacChannel
- *		__Constructor__
- *		{method}+	Dac	( const DacCfg*		const cfg,\n\t  uint32_t			cfgCount )
- *		__Private methods__
- *		{method}-	void	clkEnable		( void );
- *		{method}-	void	clkDisable		( void );
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class Dac {
+	{field}-	const DacCfg*				const cfg
+	{field}-	const uint32_t				cfgCount
+	{field}-	DAC_HandleTypeDef			dac
+	{field}-	DAC_ChannelConfTypeDef		dacChannel
+	__Constructor__
+	{method}+	Dac	( const DacCfg*		const cfg,\n\t  uint32_t			cfgCount )
+	__Private methods__
+	{method}-	void	clkEnable		( void );
+	{method}-	void	clkDisable		( void );
+}
+
+@enduml
+
+*/
 
 #pragma once
 

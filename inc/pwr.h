@@ -1,18 +1,20 @@
-/*!
- *	@startuml
- *
- *	class Pwr {
- *		{field}-	const PwrCfg*		const cfg
- *		{field}-	const uint32_t		cfgCount
- *		{field}-	uint32_t			cfgNow
- *		__Constructor__
- *		{method}+	Pwr ( const PwrCfg*	const cfg,\n\tuint32_t		cfgCount = 1 )
- *		__Public methods__
- *		{method}+	void	irqHandler		( void )
- *	}
- *
- *	@enduml
- */
+/*
+
+@startuml
+
+class Pwr {
+	{field}-	const PwrCfg*		const cfg
+	{field}-	const uint32_t		cfgCount
+	{field}-	uint32_t			cfgNow
+	__Constructor__
+	{method}+	Pwr ( const PwrCfg*	const cfg,\n\tuint32_t		cfgCount = 1 )
+	__Public methods__
+	{method}+	void	irqHandler		( void )
+}
+
+@enduml
+
+*/
 
 #pragma once
 
