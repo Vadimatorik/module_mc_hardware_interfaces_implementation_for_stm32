@@ -3,7 +3,7 @@
 #ifdef HAL_PWR_MODULE_ENABLED
 
 BaseResult Pwr::reinit ( uint32_t numberCfg ) {
-	if ( numberCfg >= this->countCfg )
+	if ( numberCfg >= this->cfgCount )
 		return BaseResult::errInputValue;
 
 	__HAL_RCC_PWR_CLK_ENABLE();

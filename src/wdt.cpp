@@ -2,18 +2,18 @@
 
 #ifdef HAL_WWDG_MODULE_ENABLED
 
-BaseResult Wdt::reinit ( uint32_t numberCfg ) {
-	if ( numberCfg >= this->countCfg )
+BaseResult Wdt::reinit ( uint32_t cfgNumber ) {
+	if ( cfgNumber >= this->cfgCount )
 		return BaseResult::errInputValue;
 
-	this->nowCfg	=	numberCfg;
+	this->cfgNow	=	cfgNumber;
 
 	*((uint32_t *) 0xE0042008)	= 0x1DFF;				// Если процессор находится в состоянии halt, watchdog будет стоять и не мешать отладке.
 
 	IWDG->KR	= 0xCCCC;
 	IWDG->KR	= 0x5555;
 	IWDG->PR	= 0x6;
-	IWDG->RLR	= 32 * this->cfg[ numberCfg].startupTimeMs / 256;
+	IWDG->RLR	= 32 * this->cfg[ cfgNumber ].startupTimeMs / 256;
 
 	while( IWDG->SR );
 
@@ -26,7 +26,7 @@ BaseResult Wdt::reinit ( uint32_t numberCfg ) {
 
 void Wdt::reset ( void ) {
 	IWDG->KR = 0x5555;//ключ, разрешающий запись
-	IWDG->RLR = 40 * this->cfg[ this->nowCfg ].runTimeMs / 256;
+	IWDG->RLR = 40 * this->cfg[ this->cfgNow ].runTimeMs / 256;
 	IWDG->KR = 0xAAAA;//ключ, перезагружающий таймер
 
 }
@@ -34,7 +34,7 @@ void Wdt::reset ( void ) {
 // Перезапуск таймера для сервисных операций
 void Wdt::resetService ( void ) {
 	IWDG->KR = 0x5555;//ключ, разрешающий запись
-	IWDG->RLR = 40 * this->cfg[ this->nowCfg  ].serviceTimeMs / 256;
+	IWDG->RLR = 40 * this->cfg[ this->cfgNow  ].serviceTimeMs / 256;
 	IWDG->KR = 0xAAAA;//ключ, перезагружающий таймер
 }
 
