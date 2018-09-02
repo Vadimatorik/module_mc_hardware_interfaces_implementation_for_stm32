@@ -40,7 +40,7 @@ class TimCompOneChannel : public TimCompOneChannelBase {
 public:
 	TimCompOneChannel	(	const TimCompOneChannelCfg*	const cfg	);
 
-	BaseResult		reinit					( uint32_t numberCfg = 0 );
+	BaseResult		reinit					( uint32_t cfgNumber = 0 );
 
 	BaseResult		on						( void );
 	void			off						( void );

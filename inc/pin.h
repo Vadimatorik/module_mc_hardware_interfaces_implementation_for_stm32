@@ -1,7 +1,7 @@
 /*!
  *	@startuml
  *
- *	class AdcOneChannel {
+ *	class Pin {
  *		{field}-	const PinCfg*		const cfg;
  *		__Constructor__
  *		{method}+	Pin	( const PinCfg*	const cfg )

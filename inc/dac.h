@@ -1,7 +1,7 @@
 /*!
  *	@startuml
  *
- *	class AdcOneChannel {
+ *	class Dac {
  *		{field}-	const DacCfg*				const cfg
  *		{field}-	const uint32_t				cfgCount
  *		{field}-	DAC_HandleTypeDef			dac
@@ -36,8 +36,8 @@ public:
 	Dac	(	const DacCfg*		const cfg,
 			uint32_t			cfgCount	);
 
-	BaseResult	reinit			( uint32_t numberCfg = 0 );
-	BaseResult	setValue		( const uint32_t ch, const uint32_t value );
+	BaseResult	reinit			( uint32_t cfgNumber = 0 );
+	BaseResult	setValue		( const uint32_t channel, const uint32_t value );
 
 private:
 	void		clkEnable		( void );

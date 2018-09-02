@@ -4,7 +4,7 @@
  *	class PinMultifunc {
  *		{field}-	const uint32_t		cfgCount
  *		__Constructor__
- *		{method}+	PinMultifunc\t( const pinCfg*\tconst cfg,\n\t\t\t  uint32_t\t\tcfgCount )
+ *		{method}+	PinMultifunc\t( const PinCfg*\tconst cfg,\n\t\t\t  uint32_t\t\tcfgCount )
  *	}
  *
  *	@enduml

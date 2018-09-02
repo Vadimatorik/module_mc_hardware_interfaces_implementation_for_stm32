@@ -8,7 +8,7 @@
  *		__Constructor__
  *		{method}+	Pwr ( const PwrCfg*	const cfg,\n\tuint32_t		cfgCount = 1 )
  *		__Public methods__
- *		{method}+	void		irqHandler		( void )
+ *		{method}+	void	irqHandler		( void )
  *	}
  *
  *	@enduml

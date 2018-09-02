@@ -50,7 +50,7 @@ public:
 	Uart	(	const UartCfg*		const cfg,
 				uint32_t			cfgCount	= 1 );
 
-	BaseResult		reinit						( uint32_t numberCfg					 = 0 );
+	BaseResult		reinit						( uint32_t cfgNumber					 = 0 );
 
 	BaseResult		on							(	void	);
 	void			off							(	void	);

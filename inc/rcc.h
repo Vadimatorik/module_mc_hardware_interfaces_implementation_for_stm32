@@ -2,11 +2,11 @@
  *	@startuml
  *
  *	class AdcOneChannel {
- *		{field}-	const rccCfg*				const cfg
+ *		{field}-	const RccCfg*				const cfg
  *		{field}-	const uint32_t				cfgCount
  *		{field}-	int						cfgNumberSet
  *		__Constructor__
- *		{method}+	Rcc	( const rccCfg*		const cfg,\n\t  const uint32_t		cfgCount )
+ *		{method}+	Rcc	( const RccCfg*		const cfg,\n\t  uint32_t			cfgCount )
  *	}
  *
  *	@enduml
@@ -56,7 +56,7 @@
 
 #include "mc_hardware_interfaces_rcc.h"
 
-struct rccCfg {
+struct RccCfg {
 	RCC_OscInitTypeDef			osc;
 	RCC_ClkInitTypeDef			clk;
 	uint32_t					fLatency;
@@ -64,8 +64,8 @@ struct rccCfg {
 
 class Rcc : public RccBase {
 public:
-	Rcc	(	const rccCfg*		const cfg,
-			const uint32_t		cfgCount	)
+	Rcc	(	const RccCfg*		const cfg,
+			uint32_t			cfgCount	)
 		: cfg( cfg ), cfgCount( cfgCount ) {}
 
 public:
@@ -73,7 +73,7 @@ public:
 	RccResult	getCfgNumber	(	uint32_t&			cfgNumber	);
 
 private:
-	const rccCfg*				const cfg;
+	const RccCfg*				const cfg;
 	const uint32_t				cfgCount;
 
 	int							cfgNumberSet	=	-1;
