@@ -1,0 +1,2 @@
+# module_mc_hardware_interfaces_implementation_for_stm32
+Реализация интерфейсов для stm32.
