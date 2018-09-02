@@ -1,0 +1,55 @@
+/*!
+ *	@startuml
+ *
+ *	class AdcOneChannel {
+ *		{field}-	const DacCfg*				const cfg
+ *		{field}-	const uint32_t				cfgCount
+ *		{field}-	DAC_HandleTypeDef			dac
+ *		{field}-	DAC_ChannelConfTypeDef		dacChannel
+ *		__Constructor__
+ *		{method}+	Dac	( const DacCfg*		const cfg,\n\t  uint32_t			cfgCount )
+ *		__Private methods__
+ *		{method}-	void	clkEnable		( void );
+ *		{method}-	void	clkDisable		( void );
+ *	}
+ *
+ *	@enduml
+ */
+
+#pragma once
+
+#ifdef __cplusplus
+
+#include "platform.h"
+
+#ifdef HAL_DAC_MODULE_ENABLED
+
+#include "mc_hardware_interfaces_dac.h"
+
+struct DacCfg {
+	uint32_t			buffer;				// DAC_OUTPUTBUFFER_ENABLE/DAC_OUTPUTBUFFER_DISABLE.
+	uint32_t			defaultValue;		// Значение, выставляемое на выводы каналов Dac после инициализации.
+};
+
+class Dac : public DacBase {
+public:
+	Dac	(	const DacCfg*		const cfg,
+			uint32_t			cfgCount	);
+
+	BaseResult	reinit			( uint32_t numberCfg = 0 );
+	BaseResult	setValue		( const uint32_t ch, const uint32_t value );
+
+private:
+	void		clkEnable		( void );
+	void		clkDisable		( void );
+
+	const DacCfg*					const cfg;
+	const uint32_t					cfgCount;
+
+	DAC_HandleTypeDef				dac;
+	DAC_ChannelConfTypeDef			dacChannel;
+};
+
+#endif
+
+#endif
