@@ -2,6 +2,8 @@
 
 @startuml
 
+Rcc ..|> RccBase
+
 class Rcc {
 	{field}-	const RccCfg*				const cfg
 	{field}-	const uint32_t				cfgCount

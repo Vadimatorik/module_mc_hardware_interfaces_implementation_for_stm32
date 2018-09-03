@@ -2,6 +2,8 @@
 
 @startuml
 
+TimCompOneChannel ..|> TimCompOneChannelBase
+
 class TimCompOneChannel {
 	{field}-	const TimCompOneChannelCfg*	const cfg
 	{field}-	TIM_HandleTypeDef			tim

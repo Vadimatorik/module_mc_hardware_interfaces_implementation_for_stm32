@@ -2,6 +2,8 @@
 
 @startuml
 
+AdcOneChannel ..|> AdcOneChannelBase
+
 class AdcOneChannel {
 	{field}-	const AdcOneChannelCfg*		const cfg
 	{field}-	const uint32_t				cfgCount

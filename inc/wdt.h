@@ -2,6 +2,8 @@
 
 @startuml
 
+Wdt ..|> WdtBase
+
 class Wdt {
 	{field}-	const WdtCfg*					const cfg
 	{field}-	const uint32_t					cfgCount

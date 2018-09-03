@@ -2,6 +2,8 @@
 
 @startuml
 
+Uart ..|> UartBase
+
 class Uart {
 	{field}-	const UartCfg*						const cfg
 	{field}-	const uint32_t						cfgCount

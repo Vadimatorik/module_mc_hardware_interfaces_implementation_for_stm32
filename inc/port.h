@@ -2,6 +2,8 @@
 
 @startuml
 
+GlobalPort ..|> GlobalPortBase
+
 class GlobalPort {
 	{field}-	const PinCfg*			const cfg
 	{field}-	const uint32_t			cfgCount

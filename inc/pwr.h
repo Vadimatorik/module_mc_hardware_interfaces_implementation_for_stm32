@@ -2,6 +2,8 @@
 
 @startuml
 
+Pwr ..|> PwrBase
+
 class Pwr {
 	{field}-	const PwrCfg*		const cfg
 	{field}-	const uint32_t		cfgCount

@@ -2,6 +2,8 @@
 
 @startuml
 
+TimPwmOneChannel ..|> TimPwmOneChannelBase
+
 class TimPwmOneChannel {
 	{field}-	const TimPwmOneChannelCfg*		const cfg
 	{field}-	TIM_HandleTypeDef				tim

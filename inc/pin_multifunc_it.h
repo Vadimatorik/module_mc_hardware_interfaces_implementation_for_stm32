@@ -2,6 +2,9 @@
 
 @startuml
 
+PinMultifuncIt --|> PinMultifunc
+PinMultifuncIt ..|> PinMultifuncItBase
+
 class PinMultifuncIt {
 	{field}-	const uint32_t			exitPin
 	__Constructor__

@@ -2,6 +2,9 @@
 
 @startuml
 
+PinMultifunc		--|>	Pin
+PinMultifunc 		..|> PinMultifuncBase
+
 class PinMultifunc {
 	{field}-	const uint32_t		cfgCount
 	__Constructor__

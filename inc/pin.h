@@ -2,6 +2,8 @@
 
 @startuml
 
+Pin ..|> PinBase
+
 class Pin {
 	{field}-	const PinCfg*		const cfg;
 	__Constructor__

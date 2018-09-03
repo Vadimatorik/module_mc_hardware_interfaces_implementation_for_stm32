@@ -2,6 +2,8 @@
 
 @startuml
 
+TimCounter ..|> TimCounterBase
+
 class TimCounter {
 	{field}-	const ClkTimBaseCfg*		const cfg
 	{field}-	TIM_HandleTypeDef		tim

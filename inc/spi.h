@@ -2,6 +2,8 @@
 
 @startuml
 
+SpiMaster8Bit ..|> SpiMaster8BitBase
+
 class SpiMaster8Bit {
 	{field}-	const SpiMaster8BitCfg*				const cfg
 	{field}-	const uint32_t						cfgCount

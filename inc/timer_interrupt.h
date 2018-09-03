@@ -2,6 +2,8 @@
 
 @startuml
 
+TimInterrupt ..|> TimInterruptBase
+
 class TimInterrupt {
 	{field}-	const TimInterruptCfg*			const cfg
 	{field}-	TIM_HandleTypeDef				tim

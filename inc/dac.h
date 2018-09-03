@@ -2,6 +2,8 @@
 
 @startuml
 
+Dac ..|> DacBase
+
 class Dac {
 	{field}-	const DacCfg*				const cfg
 	{field}-	const uint32_t				cfgCount
