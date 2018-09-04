@@ -45,7 +45,7 @@ class SpiMaster8Bit {
 
 #include "dma.h"
 #include "user_os.h"
-#include "mc_hardware_interfaces_spi.h"
+#include "../../module_mc_hardware_interfaces/mc_hardware_interfaces_spi_master_8bit.h"
 #include "pin.h"
 
 namespace McHardwareInterfacesImplementation {

@@ -1,5 +1,5 @@
-#include "spi.h"
 #include <string.h>
+#include "spi_master_8bit.h"
 
 #ifdef HAL_SPI_MODULE_ENABLED
 

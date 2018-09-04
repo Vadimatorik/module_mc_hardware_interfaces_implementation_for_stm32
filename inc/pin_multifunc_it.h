@@ -3,7 +3,7 @@
 @startuml
 
 McHardwareInterfacesImplementation.PinMultifuncIt --|> McHardwareInterfacesImplementation.PinMultifunc
-McHardwareInterfacesImplementation.PinMultifuncIt ..|> McHardwareInterfaces.PinMultifuncItBase
+McHardwareInterfacesImplementation.PinMultifuncIt ..|> McHardwareInterfaces.PinMultifuncIt
 
 namespace McHardwareInterfacesImplementation {
 

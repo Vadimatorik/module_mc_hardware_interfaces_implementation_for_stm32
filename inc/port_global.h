@@ -2,15 +2,15 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.GlobalPort ..|> McHardwareInterfaces.GlobalPort
+McHardwareInterfacesImplementation.PortGlobal ..|> McHardwareInterfaces.PortGlobal
 
 namespace McHardwareInterfacesImplementation {
 
-class GlobalPort {
+class PortGlobal {
 	{field}-	const PinCfg*			const cfg
 	{field}-	const uint32_t			cfgCount
 	__Constructor__
-	{method}+	GlobalPort	( const PinCfg*	const cfg,\n\t\t  uint32_t		cfgCount )
+	{method}+	PortGlobal	( const PinCfg*	const cfg,\n\t\t  uint32_t		cfgCount )
 }
 
 }
@@ -33,9 +33,9 @@ class GlobalPort {
 
 namespace McHardwareInterfacesImplementation {
 
-class GlobalPort : public McHardwareInterfaces::GlobalPort {
+class PortGlobal : public McHardwareInterfaces::PortGlobal {
 public:
-	GlobalPort	(	const PinCfg*		const cfg,
+	PortGlobal	(	const PinCfg*		const cfg,
 					uint32_t			cfgCount	)
 		: cfg( cfg ), cfgCount( cfgCount ) {}
 
