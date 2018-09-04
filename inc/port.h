@@ -2,13 +2,17 @@
 
 @startuml
 
-GlobalPort ..|> GlobalPortBase
+McHardwareInterfacesImplementation.GlobalPort ..|> McHardwareInterfaces.GlobalPort
+
+namespace McHardwareInterfacesImplementation {
 
 class GlobalPort {
 	{field}-	const PinCfg*			const cfg
 	{field}-	const uint32_t			cfgCount
 	__Constructor__
 	{method}+	GlobalPort	( const PinCfg*	const cfg,\n\t\t  uint32_t		cfgCount )
+}
+
 }
 
 @enduml
@@ -27,6 +31,8 @@ class GlobalPort {
 
 #include "pin.h"
 
+namespace McHardwareInterfacesImplementation {
+
 class GlobalPort : public McHardwareInterfaces::GlobalPort {
 public:
 	GlobalPort	(	const PinCfg*		const cfg,
@@ -40,6 +46,8 @@ private:
 	const uint32_t				cfgCount;
 
 };
+
+}
 
 #endif
 

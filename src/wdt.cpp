@@ -2,6 +2,8 @@
 
 #ifdef HAL_WWDG_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 BaseResult Wdt::reinit ( uint32_t cfgNumber ) {
 	if ( cfgNumber >= this->cfgCount )
 		return BaseResult::errInputValue;
@@ -51,6 +53,8 @@ void Wdt::task ( void* p_obj ) {
 		obj->reset();
 		USER_OS_TASK_DELAY_UNTIL( &last_wake_time, time_out );
 	}
+}
+
 }
 
 #endif

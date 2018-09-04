@@ -2,6 +2,8 @@
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 extern void clkTimInit ( TIM_TypeDef* tim );
 
 TimInterrupt::TimInterrupt( const TimInterruptCfg* const cfg ) : cfg( cfg ) {
@@ -57,6 +59,8 @@ void TimInterrupt::off ( void ) {
 
 void TimInterrupt::clearInterruptFlag ( void ) {
 	HAL_TIM_IRQHandler( &this->tim );
+}
+
 }
 
 #endif

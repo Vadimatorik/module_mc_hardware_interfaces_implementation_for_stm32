@@ -2,6 +2,8 @@
 
 #ifdef HAL_DMA_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 void dmaClkOn ( DMA_Stream_TypeDef* dma) {
 #if defined(STM32F1)
 	__HAL_RCC_DMA1_CLK_ENABLE();
@@ -72,6 +74,8 @@ void dmaIrqOn ( DMA_Stream_TypeDef* dma, uint32_t prio ) {
 	case DMA2_Stream7_BASE: NVIC_SetPriority( DMA2_Stream7_IRQn, prio );	NVIC_EnableIRQ( DMA2_Stream7_IRQn ); break;
 	};
 #endif
+}
+
 }
 
 #endif

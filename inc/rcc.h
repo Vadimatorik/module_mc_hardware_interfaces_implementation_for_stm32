@@ -2,7 +2,9 @@
 
 @startuml
 
-Rcc ..|> RccBase
+McHardwareInterfacesImplementation.Rcc ..|> McHardwareInterfaces.Rcc
+
+namespace McHardwareInterfacesImplementation {
 
 class Rcc {
 	{field}-	const RccCfg*				const cfg
@@ -10,6 +12,8 @@ class Rcc {
 	{field}-	int						cfgNumberSet
 	__Constructor__
 	{method}+	Rcc	( const RccCfg*		const cfg,\n\t  uint32_t			cfgCount )
+}
+
 }
 
 @enduml
@@ -60,6 +64,8 @@ class Rcc {
 
 #include "mc_hardware_interfaces_rcc.h"
 
+namespace McHardwareInterfacesImplementation {
+
 struct RccCfg {
 	RCC_OscInitTypeDef			osc;
 	RCC_ClkInitTypeDef			clk;
@@ -82,6 +88,8 @@ private:
 
 	int							cfgNumberSet	=	-1;
 };
+
+}
 
 #endif
 

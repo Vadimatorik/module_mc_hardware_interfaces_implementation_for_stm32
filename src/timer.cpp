@@ -2,6 +2,8 @@
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 // Включаем тактирование SPI.
 void clkTimInit ( TIM_TypeDef* tim ) {
 	switch ( ( uint32_t )tim ) {
@@ -57,6 +59,8 @@ void clkTimInit ( TIM_TypeDef* tim ) {
 		case	TIM16_BASE:		__HAL_RCC_TIM16_CLK_ENABLE();		break;
 #endif
 	};
+}
+
 }
 
 #endif

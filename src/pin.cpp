@@ -2,6 +2,8 @@
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 void gpioClkEn (  const GPIO_TypeDef* GPIOx ) {
 	switch ( (uint32_t)GPIOx ) {
 #ifdef GPIOA
@@ -73,6 +75,8 @@ void Pin::set ( uint8_t state ) {
 
 bool Pin::read ( void ) {
 	return HAL_GPIO_ReadPin ( ( GPIO_TypeDef* )this->cfg->GPIOx, ( uint16_t )this->cfg->init.Pin );
+}
+
 }
 
 #endif

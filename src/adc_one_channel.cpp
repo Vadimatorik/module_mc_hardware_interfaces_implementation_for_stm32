@@ -2,6 +2,8 @@
 
 #ifdef HAL_ADC_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 AdcOneChannel::AdcOneChannel( const AdcOneChannelCfg* const cfg, const uint32_t countCfg ) :
 	cfg( cfg ), countCfg( countCfg ) {}
 
@@ -74,6 +76,8 @@ uint32_t AdcOneChannel::getMeasurement ( void ) {
 
 void AdcOneChannel::irqHandler ( void ) {
 	this->adc.Instance->SR = 0;
+}
+
 }
 
 #endif

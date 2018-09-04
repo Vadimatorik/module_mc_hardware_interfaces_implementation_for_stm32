@@ -2,6 +2,8 @@
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 extern void gpioClkEn (  const GPIO_TypeDef* GPIOx );
 
 BaseResult GlobalPort::reinitAllPorts ( void ) {
@@ -10,6 +12,8 @@ BaseResult GlobalPort::reinitAllPorts ( void ) {
         HAL_GPIO_Init( ( GPIO_TypeDef* )cfg[l].GPIOx, ( GPIO_InitTypeDef* ) ( &cfg[l].init ) );
     }
 	return BaseResult::ok;
+}
+
 }
 
 #endif

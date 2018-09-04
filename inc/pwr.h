@@ -2,7 +2,9 @@
 
 @startuml
 
-Pwr ..|> PwrBase
+McHardwareInterfacesImplementation.Pwr ..|> McHardwareInterfaces.Pwr
+
+namespace McHardwareInterfacesImplementation {
 
 class Pwr {
 	{field}-	const PwrCfg*		const cfg
@@ -12,6 +14,8 @@ class Pwr {
 	{method}+	Pwr ( const PwrCfg*	const cfg,\n\tuint32_t		cfgCount = 1 )
 	__Public methods__
 	{method}+	void	irqHandler		( void )
+}
+
 }
 
 @enduml
@@ -28,6 +32,8 @@ class Pwr {
 
 #include "mc_hardware_interfaces_pwr.h"
 #include "user_os.h"
+
+namespace McHardwareInterfacesImplementation {
 
 struct PwrCfg {
 	const PWR_PVDTypeDef			cfg;
@@ -52,6 +58,8 @@ private:
 
 	uint32_t								cfgNow			=	0;
 };
+
+}
 
 #endif
 

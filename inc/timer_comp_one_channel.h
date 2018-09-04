@@ -2,7 +2,9 @@
 
 @startuml
 
-TimCompOneChannel ..|> TimCompOneChannelBase
+McHardwareInterfacesImplementation.TimCompOneChannel ..|> McHardwareInterfaces.TimCompOneChannel
+
+namespace McHardwareInterfacesImplementation {
 
 class TimCompOneChannel {
 	{field}-	const TimCompOneChannelCfg*	const cfg
@@ -10,6 +12,8 @@ class TimCompOneChannel {
 	{field}-	TIM_OC_InitTypeDef			timCh
 	__Constructor__
 	{method}+	TimCompOneChannel	( const TimCompOneChannelCfg*	const cfg )
+}
+
 }
 
 @enduml
@@ -26,6 +30,8 @@ class TimCompOneChannel {
 
 #include "timer_counter.h"
 #include "mc_hardware_interfaces_timer_comp_one_channel.h"
+
+namespace McHardwareInterfacesImplementation {
 
 struct TimCompOneChannelCfg {
 	// Используемый таймер.
@@ -55,6 +61,8 @@ private:
 	TIM_HandleTypeDef				tim;
 	TIM_OC_InitTypeDef				timCh;
 };
+
+}
 
 #endif
 

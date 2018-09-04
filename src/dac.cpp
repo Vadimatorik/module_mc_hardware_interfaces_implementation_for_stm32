@@ -2,17 +2,19 @@
 
 #ifdef HAL_DAC_MODULE_ENABLED
 
-Dac::Dac( const DacCfg* const cfg, const uint32_t countCfg ) :
-	cfg( cfg ), countCfg( countCfg ) {
+namespace McHardwareInterfacesImplementation {
+
+Dac::Dac( const DacCfg* const cfg, uint32_t cfgCount ) :
+	cfg( cfg ), cfgCount( cfgCount ) {
 	this->dac.Instance							= DAC;
-	this->dacCh.DAC_Trigger						= DAC_TRIGGER_NONE;
+	this->dacChannel.DAC_Trigger				= DAC_TRIGGER_NONE;
 }
 
 BaseResult Dac::reinit ( uint32_t numberCfg ) {
-	if ( numberCfg >= this->countCfg )	return BaseResult::errInputValue;
+	if ( numberCfg >= this->cfgCount )	return BaseResult::errInputValue;
 
 	/// Заполнение HAL-структуры.
-	this->dacCh.DAC_OutputBuffer				= cfg[ numberCfg ].buffer;
+	this->dacChannel.DAC_OutputBuffer			= cfg[ numberCfg ].buffer;
 
 	this->clkDisable();
 	this->clkEnable();
@@ -23,10 +25,10 @@ BaseResult Dac::reinit ( uint32_t numberCfg ) {
 	if ( HAL_DAC_Init( &this->dac ) != HAL_OK )
 		return BaseResult::errInit;
 
-	if ( HAL_DAC_ConfigChannel( &this->dac, &this->dacCh, DAC_CHANNEL_1 ) != HAL_OK)
+	if ( HAL_DAC_ConfigChannel( &this->dac, &this->dacChannel, DAC_CHANNEL_1 ) != HAL_OK)
 		return BaseResult::errInit;
 
-	if ( HAL_DAC_ConfigChannel( &this->dac, &this->dacCh, DAC_CHANNEL_2 ) != HAL_OK)
+	if ( HAL_DAC_ConfigChannel( &this->dac, &this->dacChannel, DAC_CHANNEL_2 ) != HAL_OK)
 		return BaseResult::errInit;
 
 	HAL_DAC_Start(  &this->dac, DAC_CHANNEL_1 );
@@ -38,13 +40,13 @@ BaseResult Dac::reinit ( uint32_t numberCfg ) {
 	return BaseResult::ok;
 }
 
-BaseResult	Dac::setValue ( const uint32_t ch, const uint32_t value ) {
-	if ( ch > 1 )			return BaseResult::errInputValue;
+BaseResult	Dac::setValue ( uint32_t channel, uint32_t value ) {
+	if ( channel > 1 )			return BaseResult::errInputValue;
 	if ( value > 0xFFF )	return BaseResult::errInputValue;
 
 	if ( this->dac.State == HAL_DAC_STATE_RESET )	return BaseResult::errInit;
 
-	if ( ch == 0 ) {
+	if ( channel == 0 ) {
 		HAL_DAC_SetValue( &this->dac, DAC_CHANNEL_1,	DAC_ALIGN_12B_R, value );
 	} else {
 		HAL_DAC_SetValue( &this->dac, DAC_CHANNEL_2,	DAC_ALIGN_12B_R, value );
@@ -59,6 +61,8 @@ void Dac::clkEnable ( void ) {
 
 void Dac::clkDisable ( void ) {
 	__HAL_RCC_DAC_CLK_DISABLE();
+}
+
 }
 
 #endif

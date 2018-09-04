@@ -2,7 +2,9 @@
 
 @startuml
 
-Dac ..|> DacBase
+McHardwareInterfacesImplementation.Dac ..|> McHardwareInterfaces.Dac
+
+namespace McHardwareInterfacesImplementation {
 
 class Dac {
 	{field}-	const DacCfg*				const cfg
@@ -14,6 +16,8 @@ class Dac {
 	__Private methods__
 	{method}-	void	clkEnable		( void );
 	{method}-	void	clkDisable		( void );
+}
+
 }
 
 @enduml
@@ -30,18 +34,20 @@ class Dac {
 
 #include "mc_hardware_interfaces_dac.h"
 
+namespace McHardwareInterfacesImplementation {
+
 struct DacCfg {
 	uint32_t			buffer;				// DAC_OUTPUTBUFFER_ENABLE/DAC_OUTPUTBUFFER_DISABLE.
 	uint32_t			defaultValue;		// Значение, выставляемое на выводы каналов Dac после инициализации.
 };
 
-class Dac : public McHardwareInterfaces::DacBase {
+class Dac : public McHardwareInterfaces::Dac {
 public:
 	Dac	(	const DacCfg*		const cfg,
 			uint32_t			cfgCount	);
 
 	BaseResult	reinit			( uint32_t cfgNumber = 0 );
-	BaseResult	setValue		( const uint32_t channel, const uint32_t value );
+	BaseResult	setValue		( uint32_t channel, uint32_t value );
 
 private:
 	void		clkEnable		( void );
@@ -53,6 +59,8 @@ private:
 	DAC_HandleTypeDef				dac;
 	DAC_ChannelConfTypeDef			dacChannel;
 };
+
+}
 
 #endif
 

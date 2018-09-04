@@ -2,7 +2,9 @@
 
 @startuml
 
-Uart ..|> UartBase
+McHardwareInterfacesImplementation.Uart ..|> McHardwareInterfaces.Uart
+
+namespace McHardwareInterfacesImplementation {
 
 class Uart {
 	{field}-	const UartCfg*						const cfg
@@ -23,6 +25,8 @@ class Uart {
 	{method}-	bool	clkDeinit			( void )
 }
 
+}
+
 @enduml
 
 */
@@ -39,6 +43,8 @@ class Uart {
 #include "pin.h"
 #include "mc_hardware_interfaces_uart.h"
 #include "user_os.h"
+
+namespace McHardwareInterfacesImplementation {
 
 struct UartCfg {
 	USART_TypeDef*				uart;
@@ -88,6 +94,8 @@ private:
 	USER_OS_STATIC_BIN_SEMAPHORE_BUFFER			sb;
 	USER_OS_STATIC_MUTEX_BUFFER					mb;
 };
+
+}
 
 #endif
 

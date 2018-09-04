@@ -2,6 +2,8 @@
 
 #ifdef HAL_RCC_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 McHardwareInterfaces::RccResult Rcc::setCfg ( const uint32_t numberCfg ) {
 	if ( numberCfg >= this->cfgCount )
 		return McHardwareInterfaces::RccResult::errCfgNumber;
@@ -30,6 +32,8 @@ McHardwareInterfaces::RccResult Rcc::getCfgNumber ( uint32_t& cfgNumber ) {
 	cfgNumber = static_cast< int >( this->cfgNumberSet );
 
 	return McHardwareInterfaces::RccResult::ok;
+}
+
 }
 
 #endif

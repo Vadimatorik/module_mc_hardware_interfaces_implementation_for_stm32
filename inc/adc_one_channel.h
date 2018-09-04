@@ -2,7 +2,9 @@
 
 @startuml
 
-AdcOneChannel ..|> AdcOneChannelBase
+McHardwareInterfacesImplementation.AdcOneChannel ..|> McHardwareInterfaces.AdcOneChannel
+
+namespace McHardwareInterfacesImplementation {
 
 class AdcOneChannel {
 	{field}-	const AdcOneChannelCfg*		const cfg
@@ -18,6 +20,8 @@ class AdcOneChannel {
 	{method}-	void	clkDisable		( void )
 }
 
+}
+
 @enduml
 
 */
@@ -31,6 +35,8 @@ class AdcOneChannel {
 #ifdef HAL_ADC_MODULE_ENABLED
 
 #include "mc_hardware_interfaces_adc_one_channel.h"
+
+namespace McHardwareInterfacesImplementation {
 
 struct AdcOneChannelCfg {
 	ADC_TypeDef*		ADCx;
@@ -64,6 +70,8 @@ private:
 	ADC_HandleTypeDef				adc;
 	ADC_ChannelConfTypeDef			channelCfg;
 };
+
+}
 
 #endif
 

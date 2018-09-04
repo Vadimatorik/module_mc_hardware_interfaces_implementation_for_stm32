@@ -2,6 +2,8 @@
 
 #ifdef HAL_PWR_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 BaseResult Pwr::reinit ( uint32_t numberCfg ) {
 	if ( numberCfg >= this->cfgCount )
 		return BaseResult::errInputValue;
@@ -24,6 +26,8 @@ void Pwr::pvdDisable ( void ) {
 
 void Pwr::irqHandler ( void ) {
 	HAL_PWR_PVD_IRQHandler();
+}
+
 }
 
 #endif

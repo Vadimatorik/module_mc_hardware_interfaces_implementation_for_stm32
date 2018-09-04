@@ -2,12 +2,16 @@
 
 @startuml
 
-Pin ..|> PinBase
+McHardwareInterfacesImplementation.Pin ..|> McHardwareInterfaces.Pin
+
+namespace McHardwareInterfacesImplementation {
 
 class Pin {
 	{field}-	const PinCfg*		const cfg;
 	__Constructor__
 	{method}+	Pin	( const PinCfg*	const cfg )
+}
+
 }
 
 @enduml
@@ -50,6 +54,8 @@ class Pin {
 		.Speed		=	GPIO_SPEED_FREQ_VERY_HIGH,	\
 		.Alternate	=	0
 
+namespace McHardwareInterfacesImplementation {
+
 struct PinCfg {
 	const GPIO_TypeDef*		 const GPIOx;
 	const GPIO_InitTypeDef	init;
@@ -75,6 +81,8 @@ protected:
 	const PinCfg*			const cfg;
 
 };
+
+}
 
 #endif
 

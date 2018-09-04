@@ -2,13 +2,17 @@
 
 @startuml
 
-PinMultifuncIt --|> PinMultifunc
-PinMultifuncIt ..|> PinMultifuncItBase
+McHardwareInterfacesImplementation.PinMultifuncIt --|> McHardwareInterfacesImplementation.PinMultifunc
+McHardwareInterfacesImplementation.PinMultifuncIt ..|> McHardwareInterfaces.PinMultifuncItBase
+
+namespace McHardwareInterfacesImplementation {
 
 class PinMultifuncIt {
 	{field}-	const uint32_t			exitPin
 	__Constructor__
 	{method}+	PinMultifuncIt\t( const PinCfg*\t\tconst cfg,\n\t\t\t  uint32_t\t\t\tcfgCount,\n\t\t\t  uint32_t\t\t\texitPin )
+}
+
 }
 
 @enduml
@@ -26,6 +30,8 @@ class PinMultifuncIt {
 #include "pin_multifunc.h"
 #include "mc_hardware_interfaces_pin_multifunc_it.h"
 
+namespace McHardwareInterfacesImplementation {
+
 class PinMultifuncIt : public PinMultifunc, public McHardwareInterfaces::PinMultifuncIt {
 public:
 	/// exitPin - GPIO_PIN_x.
@@ -41,6 +47,8 @@ private:
 	const uint32_t			exitPin;
 
 };
+
+}
 
 #endif
 

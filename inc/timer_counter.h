@@ -2,7 +2,9 @@
 
 @startuml
 
-TimCounter ..|> TimCounterBase
+McHardwareInterfacesImplementation.TimCounter ..|> McHardwareInterfaces.TimCounter
+
+namespace McHardwareInterfacesImplementation {
 
 class TimCounter {
 	{field}-	const ClkTimBaseCfg*		const cfg
@@ -10,6 +12,8 @@ class TimCounter {
 
 	__Constructor__
 	{method}+	TimCounter	( const ClkTimBaseCfg*	const cfg )
+}
+
 }
 
 @enduml
@@ -26,6 +30,8 @@ class TimCounter {
 
 #include "mc_hardware_interfaces_timer_counter.h"
 
+namespace McHardwareInterfacesImplementation {
+
 struct ClkTimBaseCfg {
 	const uint32_t					period;					// 0..0xFFFF или 0..0xFFFFFFFF
 	const uint32_t					prescaler;				// 0..0xFFFF или 0..0xFFFFFFFF.
@@ -35,7 +41,7 @@ struct ClkTimBaseCfg {
 	const uint16_t					pulse;					// 0..0xFFFF или 0..0xFFFFFFFF.
 };
 
-struct timCounterCfg {
+struct TimCounterCfg {
 	// Используемый таймер.
 	TIM_TypeDef*					tim;
 
@@ -45,7 +51,7 @@ struct timCounterCfg {
 
 class TimCounter : public McHardwareInterfaces::TimCounter {
 public:
-	TimCounter	(	const timCounterCfg*	const cfg	);
+	TimCounter	(	const TimCounterCfg*	const cfg	);
 
 	BaseResult		reinit					( uint32_t cfgNumber = 0 );
 
@@ -55,10 +61,12 @@ public:
 	uint32_t		getCounter				( void );
 
 private:
-	const timCounterCfg*		const cfg;
+	const TimCounterCfg*		const cfg;
 
-	TIM_HandleTypeDef				tim;
+	TIM_HandleTypeDef			tim;
 };
+
+}
 
 #endif
 

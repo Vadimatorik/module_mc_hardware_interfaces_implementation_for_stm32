@@ -2,13 +2,17 @@
 
 @startuml
 
-TimInterrupt ..|> TimInterruptBase
+McHardwareInterfacesImplementation.TimInterrupt ..|> McHardwareInterfaces.TimInterrupt
+
+namespace McHardwareInterfacesImplementation {
 
 class TimInterrupt {
 	{field}-	const TimInterruptCfg*			const cfg
 	{field}-	TIM_HandleTypeDef				tim
 	__Constructor__
 	{method}+	TimInterrupt	( const TimInterruptCfg*	const cfg )
+}
+
 }
 
 @enduml
@@ -25,6 +29,8 @@ class TimInterrupt {
 
 #include "timer_counter.h"
 #include "mc_hardware_interfaces_timer_interrupt.h"
+
+namespace McHardwareInterfacesImplementation {
 
 struct TimInterruptCfg {
 	TIM_TypeDef*					tim;
@@ -50,6 +56,8 @@ private:
 
 	TIM_HandleTypeDef				tim;
 };
+
+}
 
 #endif
 

@@ -2,6 +2,8 @@
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 extern void clkTimInit ( TIM_TypeDef* tim );
 
 TimCompOneChannel::TimCompOneChannel ( const TimCompOneChannelCfg* const cfg ) : cfg( cfg ) {
@@ -49,6 +51,8 @@ BaseResult TimCompOneChannel::on ( void ) {
 
 void TimCompOneChannel::off ( void ) {
 	this->tim.Instance->CR1 &= ~(TIM_CR1_CEN);
+}
+
 }
 
 #endif

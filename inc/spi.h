@@ -2,7 +2,9 @@
 
 @startuml
 
-SpiMaster8Bit ..|> SpiMaster8BitBase
+McHardwareInterfacesImplementation.SpiMaster8Bit ..|> McHardwareInterfaces.SpiMaster8Bit
+
+namespace McHardwareInterfacesImplementation {
 
 class SpiMaster8Bit {
 	{field}-	const SpiMaster8BitCfg*				const cfg
@@ -27,6 +29,8 @@ class SpiMaster8Bit {
 	{method}-	bool	initSpi		( void )
 }
 
+}
+
 @enduml
 
 */
@@ -43,6 +47,8 @@ class SpiMaster8Bit {
 #include "user_os.h"
 #include "mc_hardware_interfaces_spi.h"
 #include "pin.h"
+
+namespace McHardwareInterfacesImplementation {
 
 struct SpiMaster8BitCfg {
 	SPI_TypeDef*							SPIx;
@@ -122,6 +128,8 @@ private:
 	USER_OS_STATIC_MUTEX_BUFFER								mb;
 
 };
+
+}
 
 #endif
 

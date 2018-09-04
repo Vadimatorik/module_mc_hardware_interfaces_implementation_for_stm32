@@ -2,7 +2,9 @@
 
 @startuml
 
-Wdt ..|> WdtBase
+McHardwareInterfacesImplementation.Wdt ..|> McHardwareInterfaces.Wdt
+
+namespace McHardwareInterfacesImplementation {
 
 class Wdt {
 	{field}-	const WdtCfg*					const cfg
@@ -15,6 +17,8 @@ class Wdt {
 	{method}+	Wdt ( const WdtCfg*		const cfg,\n\tuint32_t			cfgCount = 1 )
 	__Private methods__
 	{method}{static}-	void	task	( void*	obj )
+}
+
 }
 
 @enduml
@@ -31,6 +35,8 @@ class Wdt {
 
 #include "mc_hardware_interfaces_wdt.h"
 #include "user_os.h"
+
+namespace McHardwareInterfacesImplementation {
 
 struct WdtCfg {
 	const uint8_t	taskPrio;				// Приоритет задачи, сбрасывающий wdt.
@@ -65,6 +71,8 @@ private:
 
 	uint8_t									reboot;
 };
+
+}
 
 #endif
 

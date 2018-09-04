@@ -2,6 +2,8 @@
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 extern void clkTimInit ( TIM_TypeDef* tim );
 
 TimPwmOneChannel::TimPwmOneChannel ( const TimPwmOneChannelCfg* const cfg ) : cfg( cfg ) {
@@ -50,6 +52,8 @@ void TimPwmOneChannel::off ( void ) {
 
 void TimPwmOneChannel::setDuty ( float duty ) {
 	__HAL_TIM_SET_COMPARE( &this->tim, this->cfg->outChannel, this->cfg->tim->ARR * duty );
+}
+
 }
 
 #endif

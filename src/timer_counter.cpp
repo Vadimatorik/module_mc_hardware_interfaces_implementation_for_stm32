@@ -2,9 +2,11 @@
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 extern void clkTimInit ( TIM_TypeDef* tim );
 
-TimCounter::TimCounter ( const timCounterCfg* const cfg ) : cfg( cfg ) {
+TimCounter::TimCounter ( const TimCounterCfg* const cfg ) : cfg( cfg ) {
 	this->tim.Instance						= this->cfg->tim;
 
 	this->tim.Init.ClockDivision			= TIM_CLOCKDIVISION_DIV1;
@@ -44,6 +46,8 @@ void TimCounter::off ( void ) {
 
 uint32_t TimCounter::getCounter ( void ) {
 	return this->tim.Instance->CNT;
+}
+
 }
 
 #endif

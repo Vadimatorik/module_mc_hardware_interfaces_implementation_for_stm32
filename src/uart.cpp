@@ -2,6 +2,8 @@
 
 #ifdef HAL_UART_MODULE_ENABLED
 
+namespace McHardwareInterfacesImplementation {
+
 Uart::Uart( const UartCfg* const cfg, uint32_t countCfg  ) :
 	cfg( cfg ), cfgCount( countCfg ) {
 	this->uart.Init.HwFlowCtl							= UART_HWCONTROL_NONE;
@@ -222,6 +224,8 @@ bool Uart::clkDeinit ( void ) {
 #endif
 	};
 	return false;
+}
+
 }
 
 #endif
