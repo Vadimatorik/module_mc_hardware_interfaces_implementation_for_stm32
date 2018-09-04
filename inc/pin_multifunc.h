@@ -26,7 +26,7 @@ class PinMultifunc {
 #include "pin.h"
 #include "mc_hardware_interfaces_pin_multifunc.h"
 
-class PinMultifunc : public Pin, public PinMultifuncBase {
+class PinMultifunc : public Pin, public McHardwareInterfaces::PinMultifunc {
 public:
 	PinMultifunc	(	const PinCfg*		const cfg,
 						uint32_t			cfgCount	)

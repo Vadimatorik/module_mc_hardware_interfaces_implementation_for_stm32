@@ -41,7 +41,7 @@ struct AdcOneChannelCfg {
 	uint32_t			samplingTime;								// ADC_sampling_times
 };
 
-class AdcOneChannel : public AdcOneChannelBase {
+class AdcOneChannel : public McHardwareInterfaces::AdcOneChannel {
 public:
 	AdcOneChannel	(	const AdcOneChannelCfg*		const cfg,
 						uint32_t					countCfg	);

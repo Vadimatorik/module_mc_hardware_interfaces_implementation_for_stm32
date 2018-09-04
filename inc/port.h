@@ -27,7 +27,7 @@ class GlobalPort {
 
 #include "pin.h"
 
-class GlobalPort : public GlobalPortBase {
+class GlobalPort : public McHardwareInterfaces::GlobalPort {
 public:
 	GlobalPort	(	const PinCfg*		const cfg,
 					uint32_t			cfgCount	)

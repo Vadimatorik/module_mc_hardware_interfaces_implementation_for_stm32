@@ -41,7 +41,7 @@ struct WdtCfg {
 											// во время сервисных операций (например, стирание и перезапись flash).
 };
 
-class Wdt : public WdtBase {
+class Wdt : public McHardwareInterfaces::Wdt {
 public:
 	Wdt (	const WdtCfg*		const cfg,
 			uint32_t			cfgCount = 1 )

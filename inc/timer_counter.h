@@ -43,7 +43,7 @@ struct timCounterCfg {
 	uint32_t						countCfg;
 };
 
-class TimCounter : public TimCounterBase {
+class TimCounter : public McHardwareInterfaces::TimCounter {
 public:
 	TimCounter	(	const timCounterCfg*	const cfg	);
 

@@ -40,7 +40,7 @@ struct TimPwmOneChannelCfg {
 	uint32_t						polarity;			// TIM_OCPOLARITY_LOW  / TIM_OCPOLARITY_HIGH.
 };
 
-class TimPwmOneChannel : public TimPwmOneChannelBase {
+class TimPwmOneChannel : public McHardwareInterfaces::TimPwmOneChannel {
 public:
 	TimPwmOneChannel	(	const TimPwmOneChannelCfg*	const cfg	);
 

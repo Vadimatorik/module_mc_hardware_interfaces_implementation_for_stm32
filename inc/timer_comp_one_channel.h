@@ -40,7 +40,7 @@ struct TimCompOneChannelCfg {
 
 };
 
-class TimCompOneChannel : public TimCompOneChannelBase {
+class TimCompOneChannel : public McHardwareInterfaces::TimCompOneChannel {
 public:
 	TimCompOneChannel	(	const TimCompOneChannelCfg*	const cfg	);
 

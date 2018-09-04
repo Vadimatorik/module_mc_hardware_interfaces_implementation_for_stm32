@@ -35,7 +35,7 @@ struct DacCfg {
 	uint32_t			defaultValue;		// Значение, выставляемое на выводы каналов Dac после инициализации.
 };
 
-class Dac : public DacBase {
+class Dac : public McHardwareInterfaces::DacBase {
 public:
 	Dac	(	const DacCfg*		const cfg,
 			uint32_t			cfgCount	);

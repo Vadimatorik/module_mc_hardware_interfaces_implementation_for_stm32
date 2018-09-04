@@ -33,7 +33,7 @@ struct PwrCfg {
 	const PWR_PVDTypeDef			cfg;
 };
 
-class Pwr : public PwrBase {
+class Pwr : public McHardwareInterfaces::Pwr {
 public:
 	Pwr (	const PwrCfg*	const cfg,
 			uint32_t		cfgCount = 1 )

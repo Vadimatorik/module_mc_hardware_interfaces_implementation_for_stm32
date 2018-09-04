@@ -26,7 +26,7 @@ class PinMultifuncIt {
 #include "pin_multifunc.h"
 #include "mc_hardware_interfaces_pin_multifunc_it.h"
 
-class PinMultifuncIt : public PinMultifunc, public PinMultifuncItBase {
+class PinMultifuncIt : public PinMultifunc, public McHardwareInterfaces::PinMultifuncIt {
 public:
 	/// exitPin - GPIO_PIN_x.
 	PinMultifuncIt	(	const PinCfg*		const cfg,

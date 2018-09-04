@@ -32,7 +32,7 @@ struct TimInterruptCfg {
 	uint32_t						countCfg;
 };
 
-class TimInterrupt : public TimInterruptBase {
+class TimInterrupt : public McHardwareInterfaces::TimInterrupt {
 public:
 	TimInterrupt	(	const TimInterruptCfg*	const cfg	);
 

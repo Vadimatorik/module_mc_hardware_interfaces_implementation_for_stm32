@@ -49,7 +49,7 @@ struct UartCfg {
 	uint32_t					dmaTxCh;					// Из серии DMA_CHANNEL_x.
 };
 
-class Uart : public UartBase {
+class Uart : public McHardwareInterfaces::Uart {
 public:
 	Uart	(	const UartCfg*		const cfg,
 				uint32_t			cfgCount	= 1 );
