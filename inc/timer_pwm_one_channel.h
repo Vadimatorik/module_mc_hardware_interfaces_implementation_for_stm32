@@ -50,12 +50,12 @@ class TimPwmOneChannel : public McHardwareInterfaces::TimPwmOneChannel {
 public:
 	TimPwmOneChannel	(	const TimPwmOneChannelCfg*	const cfg	);
 
-	BaseResult		reinit					( uint32_t cfgNumber = 0 );
+	McHardwareInterfaces::BaseResult		reinit					( uint32_t cfgNumber = 0 );
 
-	BaseResult		on						( void );
-	void			off						( void );
+	McHardwareInterfaces::BaseResult		on						( void );
+	void									off						( void );
 
-	void			setDuty					( float duty );
+	void									setDuty					( float duty );
 
 private:
 	const TimPwmOneChannelCfg*		const cfg;

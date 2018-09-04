@@ -60,21 +60,21 @@ public:
 	Uart	(	const UartCfg*		const cfg,
 				uint32_t			cfgCount	= 1 );
 
-	BaseResult		reinit						( uint32_t cfgNumber					 = 0 );
+	McHardwareInterfaces::BaseResult		reinit						(	uint32_t			cfgNumber		= 0 );
 
-	BaseResult		on							(	void	);
-	void			off							(	void	);
+	McHardwareInterfaces::BaseResult		on							(	void	);
+	void									off							(	void	);
 
-	BaseResult		tx							(	const uint8_t*		const txArray,
-													uint16_t			length			=	1,
-													uint32_t			timeoutMs		=	100	);
+	McHardwareInterfaces::BaseResult		tx							(	const uint8_t*		const txArray,
+																			uint16_t			length			=	1,
+																			uint32_t			timeoutMs		=	100	);
 
-	BaseResult		getByte						(	uint8_t*			retrunData,
-													uint32_t			timeoutMs		=	100	);
+	McHardwareInterfaces::BaseResult		getByte						(	uint8_t*			retrunData,
+																			uint32_t			timeoutMs		=	100	);
 
-	BaseResult		getByteWitchout				(	uint8_t* 			retrunData	);
+	McHardwareInterfaces::BaseResult		getByteWitchout				(	uint8_t* 			retrunData	);
 
-	void			irqHandler					(	void	);
+	void									irqHandler					(	void	);
 
 	/// Для внутреннего пользования HAL-а.
 	void			giveSemaphore				(	void	);

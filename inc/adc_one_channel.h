@@ -52,17 +52,17 @@ public:
 	AdcOneChannel	(	const AdcOneChannelCfg*		const cfg,
 						uint32_t					countCfg	);
 
-	BaseResult		reinit								( uint32_t numberCfg = 0 );
+	McHardwareInterfaces::BaseResult		reinit								(	uint32_t	numberCfg = 0	);
 
-	BaseResult		startContinuousConversion			( void );
-	void			stopContinuousConversion			( void );
-	uint32_t		getMeasurement						( void );
+	McHardwareInterfaces::BaseResult		startContinuousConversion			(	void	);
+	void									stopContinuousConversion			(	void	);
+	uint32_t								getMeasurement						(	void	);
 
-	void			irqHandler							( void );
+	void									irqHandler							(	void	);
 
 private:
-	void			clkEnable							( void );
-	void			clkDisable							( void );
+	void									clkEnable							(	void	);
+	void									clkDisable							(	void	);
 
 	const AdcOneChannelCfg*			const cfg;
 	const uint32_t					countCfg;

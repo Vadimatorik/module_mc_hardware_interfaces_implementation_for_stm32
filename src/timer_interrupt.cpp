@@ -13,9 +13,9 @@ TimInterrupt::TimInterrupt( const TimInterruptCfg* const cfg ) : cfg( cfg ) {
 	this->tim.Init.CounterMode				= TIM_COUNTERMODE_UP;
 }
 
-BaseResult TimInterrupt::reinit ( uint32_t numberCfg ) {
+McHardwareInterfaces::BaseResult TimInterrupt::reinit ( uint32_t numberCfg ) {
 	if ( numberCfg >= this->cfg->countCfg )
-		return BaseResult::errInputValue;
+		return McHardwareInterfaces::BaseResult::errInputValue;
 
 	this->tim.Init.Period					= this->cfg->cfg[ numberCfg ].period;
 	this->tim.Init.Prescaler				= this->cfg->cfg[ numberCfg ].prescaler;
@@ -23,17 +23,17 @@ BaseResult TimInterrupt::reinit ( uint32_t numberCfg ) {
 	clkTimInit( this->cfg->tim );
 
 	if ( HAL_TIM_Base_DeInit( &this->tim ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	if ( HAL_TIM_Base_Init( &this->tim ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
-BaseResult TimInterrupt::setState ( bool state ) {
+McHardwareInterfaces::BaseResult TimInterrupt::setState ( bool state ) {
 	if ( this->tim.State == HAL_TIM_STATE_RESET )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	if ( state ) {
 		HAL_TIM_Base_Start_IT( &this->tim );
@@ -41,16 +41,16 @@ BaseResult TimInterrupt::setState ( bool state ) {
 		HAL_TIM_Base_Stop_IT( &this->tim );
 	}
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
-BaseResult TimInterrupt::on ( void ) {
+McHardwareInterfaces::BaseResult TimInterrupt::on ( void ) {
 	if ( this->tim.State == HAL_TIM_STATE_RESET )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	HAL_TIM_Base_Start_IT( &this->tim );
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
 void TimInterrupt::off ( void ) {

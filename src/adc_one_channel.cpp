@@ -7,8 +7,8 @@ namespace McHardwareInterfacesImplementation {
 AdcOneChannel::AdcOneChannel( const AdcOneChannelCfg* const cfg, const uint32_t countCfg ) :
 	cfg( cfg ), countCfg( countCfg ) {}
 
-BaseResult AdcOneChannel::reinit ( uint32_t numberCfg ) {
-	if ( numberCfg >= this->countCfg )	return BaseResult::errInputValue;
+McHardwareInterfaces::BaseResult AdcOneChannel::reinit ( uint32_t numberCfg ) {
+	if ( numberCfg >= this->countCfg )	return McHardwareInterfaces::BaseResult::errInputValue;
 
 	/// Заполняем HAL-структуру.
 	this->adc.Instance						= this->cfg[ numberCfg ].ADCx;
@@ -35,12 +35,12 @@ BaseResult AdcOneChannel::reinit ( uint32_t numberCfg ) {
 
 	HAL_StatusTypeDef r;
 	r = HAL_ADC_Init( &this->adc );
-	if ( r != HAL_OK ) return BaseResult::errInit;
+	if ( r != HAL_OK ) return McHardwareInterfaces::BaseResult::errInit;
 
 	r = HAL_ADC_ConfigChannel( &this->adc, &this->channelCfg );
-	if ( r != HAL_OK ) return BaseResult::errInit;
+	if ( r != HAL_OK ) return McHardwareInterfaces::BaseResult::errInit;
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
 void AdcOneChannel::clkEnable ( void ) {
@@ -59,11 +59,11 @@ void AdcOneChannel::clkDisable ( void ) {
 	}
 }
 
-BaseResult AdcOneChannel::startContinuousConversion ( void ) {
+McHardwareInterfaces::BaseResult AdcOneChannel::startContinuousConversion ( void ) {
 	HAL_StatusTypeDef r;
 	r = HAL_ADC_Start( &this->adc );
-	if ( r != HAL_OK ) return BaseResult::errInit;
-	return BaseResult::ok;
+	if ( r != HAL_OK ) return McHardwareInterfaces::BaseResult::errInit;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
 void AdcOneChannel::stopContinuousConversion ( void ) {

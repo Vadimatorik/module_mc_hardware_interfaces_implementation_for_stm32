@@ -4,9 +4,9 @@
 
 namespace McHardwareInterfacesImplementation {
 
-BaseResult Wdt::reinit ( uint32_t cfgNumber ) {
+McHardwareInterfaces::BaseResult Wdt::reinit ( uint32_t cfgNumber ) {
 	if ( cfgNumber >= this->cfgCount )
-		return BaseResult::errInputValue;
+		return McHardwareInterfaces::BaseResult::errInputValue;
 
 	this->cfgNow	=	cfgNumber;
 
@@ -23,7 +23,7 @@ BaseResult Wdt::reinit ( uint32_t cfgNumber ) {
 
 	USER_OS_STATIC_TASK_CREATE( this->task, "wdt", 64, ( void* )this, this->cfg->taskPrio, this->taskStack, &this->taskStruct );
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
 void Wdt::reset ( void ) {

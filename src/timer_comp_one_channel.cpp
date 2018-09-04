@@ -17,9 +17,9 @@ TimCompOneChannel::TimCompOneChannel ( const TimCompOneChannelCfg* const cfg ) :
 	this->timCh.Pulse						= 0;
 }
 
-BaseResult TimCompOneChannel::reinit ( uint32_t numberCfg ) {
+McHardwareInterfaces::BaseResult TimCompOneChannel::reinit ( uint32_t numberCfg ) {
 	if ( numberCfg >= this->cfg->countCfg )
-		return BaseResult::errInputValue;
+		return McHardwareInterfaces::BaseResult::errInputValue;
 
 	this->tim.Init.Period					= this->cfg->cfg[ numberCfg ].period;
 	this->tim.Init.Prescaler				= this->cfg->cfg[ numberCfg ].prescaler;
@@ -28,25 +28,25 @@ BaseResult TimCompOneChannel::reinit ( uint32_t numberCfg ) {
 	clkTimInit( this->tim.Instance );
 
 	if ( HAL_TIM_OC_DeInit( &this->tim ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	if ( HAL_TIM_OC_Init( &this->tim ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	if ( HAL_TIM_OC_ConfigChannel( &this->tim, &this->timCh, this->cfg->outChannel ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
-BaseResult TimCompOneChannel::on ( void ) {
+McHardwareInterfaces::BaseResult TimCompOneChannel::on ( void ) {
 	if ( this->tim.State == HAL_TIM_STATE_RESET )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	HAL_TIM_OC_Start( &this->tim, this->cfg->outChannel );
 	HAL_TIMEx_OCN_Start( &this->tim, this->cfg->outChannel );
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
 void TimCompOneChannel::off ( void ) {

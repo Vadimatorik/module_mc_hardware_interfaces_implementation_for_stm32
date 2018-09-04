@@ -16,9 +16,9 @@ TimPwmOneChannel::TimPwmOneChannel ( const TimPwmOneChannelCfg* const cfg ) : cf
 	this->timChannel.OCPolarity					= this->cfg->polarity;
 }
 
-BaseResult TimPwmOneChannel::reinit ( uint32_t numberCfg ) {
+McHardwareInterfaces::BaseResult TimPwmOneChannel::reinit ( uint32_t numberCfg ) {
 	if ( numberCfg >= this->cfg->countCfg )
-		return BaseResult::errInputValue;
+		return McHardwareInterfaces::BaseResult::errInputValue;
 
 	this->tim.Init.Period					= this->cfg->cfg[ numberCfg ].period;
 	this->tim.Init.Prescaler				= this->cfg->cfg[ numberCfg ].prescaler;
@@ -26,24 +26,24 @@ BaseResult TimPwmOneChannel::reinit ( uint32_t numberCfg ) {
 	clkTimInit( this->cfg->tim );
 
 	if ( HAL_TIM_PWM_DeInit( &this->tim ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	if ( HAL_TIM_PWM_Init( &this->tim ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	if ( HAL_TIM_PWM_ConfigChannel( &this->tim, &this->timChannel, this->cfg->outChannel ) != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
-BaseResult TimPwmOneChannel::on ( void ) {
+McHardwareInterfaces::BaseResult TimPwmOneChannel::on ( void ) {
 	if ( this->tim.State == HAL_TIM_STATE_RESET )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	HAL_TIM_PWM_Start( &this->tim, this->cfg->outChannel );
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
 void TimPwmOneChannel::off ( void ) {

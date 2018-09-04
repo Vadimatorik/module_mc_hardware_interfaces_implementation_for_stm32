@@ -46,12 +46,12 @@ public:
 	Dac	(	const DacCfg*		const cfg,
 			uint32_t			cfgCount	);
 
-	BaseResult	reinit			( uint32_t cfgNumber = 0 );
-	BaseResult	setValue		( uint32_t channel, uint32_t value );
+	McHardwareInterfaces::BaseResult	reinit			( uint32_t cfgNumber = 0 );
+	McHardwareInterfaces::BaseResult	setValue		( uint32_t channel, uint32_t value );
 
 private:
-	void		clkEnable		( void );
-	void		clkDisable		( void );
+	void								clkEnable		( void );
+	void								clkDisable		( void );
 
 	const DacCfg*					const cfg;
 	const uint32_t					cfgCount;

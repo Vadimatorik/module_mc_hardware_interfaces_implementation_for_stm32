@@ -50,10 +50,10 @@ class TimCompOneChannel : public McHardwareInterfaces::TimCompOneChannel {
 public:
 	TimCompOneChannel	(	const TimCompOneChannelCfg*	const cfg	);
 
-	BaseResult		reinit					( uint32_t cfgNumber = 0 );
+	McHardwareInterfaces::BaseResult		reinit					( uint32_t cfgNumber = 0 );
 
-	BaseResult		on						( void );
-	void			off						( void );
+	McHardwareInterfaces::BaseResult		on						( void );
+	void									off						( void );
 
 private:
 	const TimCompOneChannelCfg*		const cfg;

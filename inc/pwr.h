@@ -45,12 +45,12 @@ public:
 			uint32_t		cfgCount = 1 )
 		: cfg( cfg ), cfgCount( cfgCount ) {}
 
-	BaseResult	reinit			( uint32_t cfgNumber = 0 );
+	McHardwareInterfaces::BaseResult	reinit			(	uint32_t cfgNumber = 0	);
 
-	void		pvdEnable		( void );
-	void		pvdDisable		( void );
+	void								pvdEnable		(	void	);
+	void								pvdDisable		(	void	);
 
-	void		irqHandler		( void );
+	void								irqHandler		(	void	);
 
 private:
 	const PwrCfg*							const cfg;

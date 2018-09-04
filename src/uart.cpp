@@ -31,9 +31,9 @@ Uart::Uart( const UartCfg* const cfg, uint32_t countCfg  ) :
 	this->s = USER_OS_STATIC_BIN_SEMAPHORE_CREATE( &this->sb );
 }
 
-BaseResult Uart::reinit ( uint32_t numberCfg ) {
+McHardwareInterfaces::BaseResult Uart::reinit ( uint32_t numberCfg ) {
 	if ( numberCfg >= this->cfgCount )
-		return BaseResult::errInputValue;
+		return McHardwareInterfaces::BaseResult::errInputValue;
 
 	this->clkDeinit();
 
@@ -55,30 +55,30 @@ BaseResult Uart::reinit ( uint32_t numberCfg ) {
 
 	r = HAL_UART_DeInit( &this->uart );
 	if ( r != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	r = HAL_UART_Init( &this->uart );
 	if ( r != HAL_OK )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	if ( this->cfg->de != nullptr )    	this->cfg->de->reset();
 
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
-BaseResult Uart::on ( void ) {
+McHardwareInterfaces::BaseResult Uart::on ( void ) {
 	if (   this->uart.gState == HAL_UART_STATE_RESET )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	__HAL_UART_ENABLE( &this->uart );
-	return BaseResult::ok;
+	return McHardwareInterfaces::BaseResult::ok;
 }
 
 void Uart::off ( void ) {
 	__HAL_UART_DISABLE( &this->uart );
 }
 
-BaseResult Uart::tx (	const uint8_t*		const txArray,
+McHardwareInterfaces::BaseResult Uart::tx (	const uint8_t*		const txArray,
 						uint16_t			length,
 						uint32_t			timeoutMs	) {
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
@@ -92,9 +92,9 @@ BaseResult Uart::tx (	const uint8_t*		const txArray,
 		HAL_UART_Transmit_IT( &this->uart, ( uint8_t* )txArray, length );
 	}
 
-	BaseResult rv = BaseResult::errTimeOut;
+	McHardwareInterfaces::BaseResult rv = McHardwareInterfaces::BaseResult::errTimeOut;
 	if ( USER_OS_TAKE_BIN_SEMAPHORE ( this->s, timeoutMs ) == pdTRUE ) {
-		rv = BaseResult::ok;
+		rv = McHardwareInterfaces::BaseResult::ok;
 	}
 
 	if ( this->cfg->de != nullptr )    		this->cfg->de->reset();
@@ -103,37 +103,37 @@ BaseResult Uart::tx (	const uint8_t*		const txArray,
 	return rv;
 }
 
-BaseResult Uart::getByteWitchout (	uint8_t* retrunData	) {
+McHardwareInterfaces::BaseResult Uart::getByteWitchout (	uint8_t* retrunData	) {
 	if (   this->uart.gState == HAL_UART_STATE_RESET )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	/// Если есть данные.
 	if ( __HAL_UART_GET_FLAG( &this->uart, UART_FLAG_RXNE ) ) {
 		*retrunData = this->uart.Instance->DR;
-		return BaseResult::ok;
+		return McHardwareInterfaces::BaseResult::ok;
 	}
 
-	return BaseResult::errNotData;
+	return McHardwareInterfaces::BaseResult::errNotData;
 }
 
-BaseResult Uart::getByte (	uint8_t*		retrunData,
+McHardwareInterfaces::BaseResult Uart::getByte (	uint8_t*		retrunData,
 							uint32_t		timeoutMs	) {
 	if (   this->uart.gState == HAL_UART_STATE_RESET )
-		return BaseResult::errInit;
+		return McHardwareInterfaces::BaseResult::errInit;
 
 	/// Если есть данные.
 	if ( __HAL_UART_GET_FLAG( &this->uart, UART_FLAG_RXNE ) ) {
 		*retrunData = this->uart.Instance->DR;
-		return BaseResult::ok;
+		return McHardwareInterfaces::BaseResult::ok;
 	}
 
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
 	USER_OS_TAKE_BIN_SEMAPHORE ( this->s, 0 );
 
-	volatile BaseResult rv = BaseResult::errTimeOut;
+	volatile McHardwareInterfaces::BaseResult rv = McHardwareInterfaces::BaseResult::errTimeOut;
 	if ( USER_OS_TAKE_BIN_SEMAPHORE ( this->s, timeoutMs ) == pdTRUE ) {
 		*retrunData = this->uart.Instance->DR;
-		rv = BaseResult::ok;
+		rv = McHardwareInterfaces::BaseResult::ok;
 	}
 
 	USER_OS_GIVE_MUTEX( this->m );

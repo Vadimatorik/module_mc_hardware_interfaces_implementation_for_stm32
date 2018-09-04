@@ -42,14 +42,14 @@ class TimInterrupt : public McHardwareInterfaces::TimInterrupt {
 public:
 	TimInterrupt	(	const TimInterruptCfg*	const cfg	);
 
-	BaseResult		reinit							( uint32_t cfgNumber = 0 );
+	McHardwareInterfaces::BaseResult		reinit							( uint32_t cfgNumber = 0 );
 
-	BaseResult		setState						(	bool	state	);
+	McHardwareInterfaces::BaseResult		setState						(	bool	state	);
 
-	BaseResult		on								( void );
-	void			off								( void );
+	McHardwareInterfaces::BaseResult		on								( void );
+	void									off								( void );
 
-	void			clearInterruptFlag				( void );
+	void									clearInterruptFlag				( void );
 
 private:
 	const TimInterruptCfg*			const cfg;

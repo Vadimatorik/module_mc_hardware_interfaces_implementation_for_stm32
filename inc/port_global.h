@@ -39,7 +39,7 @@ public:
 					uint32_t			cfgCount	)
 		: cfg( cfg ), cfgCount( cfgCount ) {}
 
-	BaseResult	reinitAllPorts		( void );
+	McHardwareInterfaces::BaseResult	reinitAllPorts		( void );
 
 private:
 	const PinCfg*				const cfg;

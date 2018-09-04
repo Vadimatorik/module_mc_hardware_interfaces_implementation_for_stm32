@@ -53,12 +53,12 @@ class TimCounter : public McHardwareInterfaces::TimCounter {
 public:
 	TimCounter	(	const TimCounterCfg*	const cfg	);
 
-	BaseResult		reinit					( uint32_t cfgNumber = 0 );
+	McHardwareInterfaces::BaseResult		reinit					( uint32_t cfgNumber = 0 );
 
-	BaseResult		on						( void );
-	void			off						( void );
+	McHardwareInterfaces::BaseResult		on						( void );
+	void									off						( void );
 
-	uint32_t		getCounter				( void );
+	uint32_t								getCounter				( void );
 
 private:
 	const TimCounterCfg*		const cfg;

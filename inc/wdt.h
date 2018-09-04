@@ -54,9 +54,9 @@ public:
 		: cfg( cfg ), cfgCount( cfgCount ),
 		  cfgNow( 0 ) {}
 
-	BaseResult		reinit			( uint32_t numberCfg = 0 );
-	void			reset			( void );
-	void			resetService	( void );
+	McHardwareInterfaces::BaseResult		reinit			( uint32_t numberCfg = 0 );
+	void									reset			( void );
+	void									resetService	( void );
 
 private:
 	const WdtCfg*							const cfg;
