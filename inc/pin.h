@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.Pin ..|> McHardwareInterfaces.Pin
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.Pin ..|> McHardwareInterfaces.Pin
 
 class Pin {
 	{field}-	const PinCfg*		const cfg;

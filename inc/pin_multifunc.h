@@ -2,10 +2,10 @@
 
 @startuml
 
+namespace McHardwareInterfacesImplementation {
+
 McHardwareInterfacesImplementation.PinMultifunc		--|>	McHardwareInterfacesImplementation.Pin
 McHardwareInterfacesImplementation.PinMultifunc 	..|> 	McHardwareInterfaces.PinMultifunc
-
-namespace McHardwareInterfacesImplementation {
 
 class PinMultifunc {
 	{field}-	const uint32_t		cfgCount

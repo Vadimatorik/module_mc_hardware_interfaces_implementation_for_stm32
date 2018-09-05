@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.PortGlobal ..|> McHardwareInterfaces.PortGlobal
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.PortGlobal ..|> McHardwareInterfaces.PortGlobal
 
 class PortGlobal {
 	{field}-	const PinCfg*			const cfg

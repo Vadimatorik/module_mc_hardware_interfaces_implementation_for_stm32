@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.Rcc ..|> McHardwareInterfaces.Rcc
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.Rcc ..|> McHardwareInterfaces.Rcc
 
 class Rcc {
 	{field}-	const RccCfg*				const cfg

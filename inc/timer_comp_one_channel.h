@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.TimCompOneChannel ..|> McHardwareInterfaces.TimCompOneChannel
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.TimCompOneChannel ..|> McHardwareInterfaces.TimCompOneChannel
 
 class TimCompOneChannel {
 	{field}-	const TimCompOneChannelCfg*	const cfg

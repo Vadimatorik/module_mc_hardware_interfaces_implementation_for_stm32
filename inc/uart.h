@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.Uart ..|> McHardwareInterfaces.Uart
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.Uart ..|> McHardwareInterfaces.Uart
 
 class Uart {
 	{field}-	const UartCfg*						const cfg

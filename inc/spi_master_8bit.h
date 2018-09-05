@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.SpiMaster8Bit ..|> McHardwareInterfaces.SpiMaster8Bit
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.SpiMaster8Bit ..|> McHardwareInterfaces.SpiMaster8Bit
 
 class SpiMaster8Bit {
 	{field}-	const SpiMaster8BitCfg*				const cfg

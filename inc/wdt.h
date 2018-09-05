@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.Wdt ..|> McHardwareInterfaces.Wdt
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.Wdt ..|> McHardwareInterfaces.Wdt
 
 class Wdt {
 	{field}-	const WdtCfg*					const cfg

@@ -2,10 +2,10 @@
 
 @startuml
 
+namespace McHardwareInterfacesImplementation {
+
 McHardwareInterfacesImplementation.PinMultifuncIt --|> McHardwareInterfacesImplementation.PinMultifunc
 McHardwareInterfacesImplementation.PinMultifuncIt ..|> McHardwareInterfaces.PinMultifuncIt
-
-namespace McHardwareInterfacesImplementation {
 
 class PinMultifuncIt {
 	{field}-	const uint32_t			exitPin

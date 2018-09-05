@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.Pwr ..|> McHardwareInterfaces.Pwr
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.Pwr ..|> McHardwareInterfaces.Pwr
 
 class Pwr {
 	{field}-	const PwrCfg*		const cfg

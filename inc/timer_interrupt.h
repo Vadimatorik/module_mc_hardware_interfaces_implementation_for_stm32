@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.TimInterrupt ..|> McHardwareInterfaces.TimInterrupt
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.TimInterrupt ..|> McHardwareInterfaces.TimInterrupt
 
 class TimInterrupt {
 	{field}-	const TimInterruptCfg*			const cfg

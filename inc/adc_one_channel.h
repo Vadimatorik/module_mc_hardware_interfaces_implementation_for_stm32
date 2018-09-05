@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.AdcOneChannel ..|> McHardwareInterfaces.AdcOneChannel
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.AdcOneChannel ..|> McHardwareInterfaces.AdcOneChannel
 
 class AdcOneChannel {
 	{field}-	const AdcOneChannelCfg*		const cfg

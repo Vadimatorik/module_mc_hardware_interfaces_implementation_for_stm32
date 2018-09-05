@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.TimPwmOneChannel ..|> McHardwareInterfaces.TimPwmOneChannel
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.TimPwmOneChannel ..|> McHardwareInterfaces.TimPwmOneChannel
 
 class TimPwmOneChannel {
 	{field}-	const TimPwmOneChannelCfg*		const cfg

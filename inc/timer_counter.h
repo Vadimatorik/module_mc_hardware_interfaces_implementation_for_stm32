@@ -2,9 +2,9 @@
 
 @startuml
 
-McHardwareInterfacesImplementation.TimCounter ..|> McHardwareInterfaces.TimCounter
-
 namespace McHardwareInterfacesImplementation {
+
+McHardwareInterfacesImplementation.TimCounter ..|> McHardwareInterfaces.TimCounter
 
 class TimCounter {
 	{field}-	const ClkTimBaseCfg*		const cfg
