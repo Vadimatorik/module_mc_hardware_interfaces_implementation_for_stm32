@@ -53,10 +53,10 @@ public:
 	void								irqHandler		(	void	);
 
 private:
-	const PwrCfg*							const cfg;
-	const uint32_t							cfgCount;
+	const PwrCfg*			const cfg;
+	const uint32_t			cfgCount;
 
-	uint32_t								cfgNow			=	0;
+	uint32_t				cfgNow			=	0;
 };
 
 }
