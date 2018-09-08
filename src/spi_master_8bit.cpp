@@ -92,7 +92,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::tx (	const uint8_t*		const txArr
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
 
 	McHardwareInterfaces::BaseResult rv = McHardwareInterfaces::BaseResult::errTimeOut ;
-	xSemaphoreTake ( this->s, 0 );
+	USER_OS_TAKE_BIN_SEMAPHORE ( this->s, 0 );
 
 	if ( this->cs != nullptr )
 		this->cs->set( 0 );
@@ -101,7 +101,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::tx (	const uint8_t*		const txArr
 		HAL_SPI_Transmit_DMA( &this->spi, ( uint8_t* )txArray, length );
 	}
 
-	if ( xSemaphoreTake ( this->s, timeoutMs ) == pdTRUE ) {
+	if ( USER_OS_TAKE_BIN_SEMAPHORE ( this->s, timeoutMs ) == pdTRUE ) {
 		rv = McHardwareInterfaces::BaseResult::ok;
 	}
 
@@ -118,7 +118,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::tx (	const uint8_t*		const txArr
 								uint16_t			length,
 								uint32_t			timeoutMs	) {
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
-	xSemaphoreTake ( this->s, 0 );
+	USER_OS_TAKE_BIN_SEMAPHORE ( this->s, 0 );
 
 	McHardwareInterfaces::BaseResult rv = McHardwareInterfaces::BaseResult::errTimeOut;
 
@@ -131,7 +131,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::tx (	const uint8_t*		const txArr
 		HAL_SPI_TransmitReceive_IT( &this->spi, ( uint8_t* )txArray, rxArray, length );
 	}
 
-	if ( xSemaphoreTake ( this->s, timeoutMs ) == pdTRUE ) {
+	if ( USER_OS_TAKE_BIN_SEMAPHORE ( this->s, timeoutMs ) == pdTRUE ) {
 		rv = McHardwareInterfaces::BaseResult::ok;
 	}
 
@@ -149,7 +149,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::txOneItem (	uint8_t		txByte,
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
 
 	McHardwareInterfaces::BaseResult rv = McHardwareInterfaces::BaseResult::errTimeOut ;
-	xSemaphoreTake ( this->s, 0 );
+	USER_OS_TAKE_BIN_SEMAPHORE ( this->s, 0 );
 
 	if ( this->cs != nullptr )
 		this->cs->set( 0 );
@@ -163,7 +163,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::txOneItem (	uint8_t		txByte,
 		HAL_SPI_Transmit_IT( &this->spi, txArray, count );
 	}
 
-	if ( xSemaphoreTake ( this->s, timeoutMs ) == pdTRUE ) {
+	if ( USER_OS_TAKE_BIN_SEMAPHORE ( this->s, timeoutMs ) == pdTRUE ) {
 		rv = McHardwareInterfaces::BaseResult::ok;
 	}
 
@@ -180,7 +180,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::rx (	uint8_t*		rxArray,
 								uint32_t		timeoutMs,
 								uint8_t			outValue	) {
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
-	xSemaphoreTake ( this->s, 0 );
+	USER_OS_TAKE_BIN_SEMAPHORE ( this->s, 0 );
 
 	McHardwareInterfaces::BaseResult rv = McHardwareInterfaces::BaseResult::errTimeOut ;
 
@@ -196,7 +196,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::rx (	uint8_t*		rxArray,
 		HAL_SPI_TransmitReceive_IT( &this->spi, txDummy, rxArray, length );
 	}
 
-	if ( xSemaphoreTake ( this->s, timeoutMs ) == pdTRUE ) {
+	if ( USER_OS_TAKE_BIN_SEMAPHORE ( this->s, timeoutMs ) == pdTRUE ) {
 		rv = McHardwareInterfaces::BaseResult::ok;
 	}
 
