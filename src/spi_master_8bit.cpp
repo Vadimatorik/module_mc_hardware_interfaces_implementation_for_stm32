@@ -31,6 +31,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 
 	if ( cfg->dmaTx != nullptr ) {
 		this->spi.hdmatx							=	&this->dmaTx;
+		this->spi.hdmatx->Parent					=	&this->spi;
 		this->spi.hdmatx->Instance					=	this->cfg[ numberCfg ].dmaTx;
 		this->spi.hdmatx->Init.Channel				=	this->cfg[ numberCfg ].dmaTxCh;
 		this->spi.hdmatx->Init.Direction			=	DMA_MEMORY_TO_PERIPH;
@@ -41,13 +42,11 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmatx->Init.Mode					=	DMA_NORMAL;
 		this->spi.hdmatx->Init.Priority				=	DMA_PRIORITY_HIGH;
 		this->spi.hdmatx->Init.FIFOMode				=	DMA_FIFOMODE_DISABLE;
-
-		this->spi.hdmatx							=	&this->dmaTx;
-		this->spi.hdmatx->Parent					=	&this->spi;
 	}
 
 	if ( cfg->dmaRx != nullptr ) {
 		this->spi.hdmarx							=	&this->dmaRx;
+		this->spi.hdmarx->Parent					=	&this->spi;
 		this->spi.hdmarx->Instance					=	this->cfg[ numberCfg ].dmaRx;
 		this->spi.hdmarx->Init.Channel				=	this->cfg[ numberCfg ].dmaRxCh;
 		this->spi.hdmarx->Init.Direction			=	DMA_PERIPH_TO_MEMORY;
@@ -58,9 +57,6 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmarx->Init.Mode					=	DMA_NORMAL;
 		this->spi.hdmarx->Init.Priority				=	DMA_PRIORITY_HIGH;
 		this->spi.hdmarx->Init.FIFOMode				=	DMA_FIFOMODE_DISABLE;
-
-		this->spi.hdmarx							=	&this->dmaRx;
-		this->spi.hdmarx->Parent					=	&this->spi;
 	}
 
 	this->baudratePrescalerArray					=	this->cfg[ numberCfg ].baudratePrescalerArray;
@@ -87,8 +83,8 @@ void SpiMaster8Bit::off ( void ) {
 }
 
 McHardwareInterfaces::BaseResult SpiMaster8Bit::tx (	const uint8_t*		const txArray,
-								uint16_t			length,
-								uint32_t			timeoutMs ) {
+														uint16_t			length,
+														uint32_t			timeoutMs ) {
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
 
 	McHardwareInterfaces::BaseResult rv = McHardwareInterfaces::BaseResult::errTimeOut ;

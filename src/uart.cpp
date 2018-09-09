@@ -13,7 +13,8 @@ Uart::Uart( const UartCfg* const cfg, uint32_t countCfg  ) :
 	this->uart.Init.WordLength							= UART_WORDLENGTH_8B;
 
 	if ( cfg->dmaTx != nullptr ) {
-		this->uart.hdmatx = &this->dmaTx;
+		this->uart.hdmatx								= &this->dmaTx;
+		this->uart.hdmatx->Parent						= &this->uart;
 
 		this->uart.hdmatx->Init.Direction				= DMA_MEMORY_TO_PERIPH;
 		this->uart.hdmatx->Init.PeriphInc				= DMA_PINC_DISABLE;
@@ -47,6 +48,11 @@ McHardwareInterfaces::BaseResult Uart::reinit ( uint32_t numberCfg ) {
 		this->uart.hdmatx								= &this->dmaTx;
 		this->uart.hdmatx->Parent						= &this->uart;
 		dmaClkOn( this->cfg->dmaTx );
+
+		if ( HAL_DMA_Init( &this->dmaTx ) != HAL_OK )
+			return McHardwareInterfaces::BaseResult::errInit;
+
+		dmaIrqOn( this->cfg->dmaTx, cfg[ numberCfg ].dmaTxPrio );
 	}
 
 	this->clkInit();
@@ -79,8 +85,8 @@ void Uart::off ( void ) {
 }
 
 McHardwareInterfaces::BaseResult Uart::tx (	const uint8_t*		const txArray,
-						uint16_t			length,
-						uint32_t			timeoutMs	) {
+											uint16_t			length,
+											uint32_t			timeoutMs	) {
 	USER_OS_TAKE_MUTEX( this->m, portMAX_DELAY );
 	USER_OS_TAKE_BIN_SEMAPHORE ( this->s, 0 );
 
@@ -143,6 +149,9 @@ McHardwareInterfaces::BaseResult Uart::getByte (	uint8_t*		retrunData,
 
 void Uart::irqHandler ( void ) {
 	HAL_UART_IRQHandler( &this->uart );
+	if ( this->uart.hdmatx != nullptr ) {
+		HAL_DMA_IRQHandler( this->uart.hdmatx );
+	}
 }
 
 extern "C" {
