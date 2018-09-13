@@ -12,17 +12,24 @@ McHardwareInterfaces::BaseResult AdcOneChannel::reinit ( uint32_t numberCfg ) {
 
 	/// Заполняем HAL-структуру.
 	this->adc.Instance						= this->cfg[ numberCfg ].ADCx;
+
+#if defined( STM32F2 ) && defined( STM32F4 )
 	this->adc.Init.ClockPrescaler			= this->cfg[ numberCfg ].clockPrescaler;
 	this->adc.Init.Resolution				= this->cfg[ numberCfg ].resolution;
+#endif
 	this->adc.Init.DataAlign				= this->cfg[ numberCfg ].dataAlign;
 	this->adc.Init.ScanConvMode				= DISABLE;
 	this->adc.Init.ContinuousConvMode		= ENABLE;
 	this->adc.Init.DiscontinuousConvMode	= DISABLE;
+#if defined( STM32F2 ) && defined( STM32F4 )
 	this->adc.Init.ExternalTrigConv			= ADC_SOFTWARE_START;
 	this->adc.Init.ExternalTrigConvEdge		= ADC_EXTERNALTRIGCONVEDGE_NONE;
+#endif
 	this->adc.Init.NbrOfConversion			= 1;
+#if defined( STM32F2 ) && defined( STM32F4 )
 	this->adc.Init.DMAContinuousRequests	= DISABLE;
 	this->adc.Init.EOCSelection				= ADC_EOC_SEQ_CONV;
+#endif
 
 	this->channelCfg.Channel				= this->cfg[ numberCfg ].channel;
 	this->channelCfg.Rank					= 1;
@@ -47,7 +54,9 @@ void AdcOneChannel::clkEnable ( void ) {
 	switch( ( uint32_t )this->adc.Instance ) {
 		case ADC1_BASE:	__HAL_RCC_ADC1_CLK_ENABLE(); break;
 		case ADC2_BASE:	__HAL_RCC_ADC2_CLK_ENABLE(); break;
+#ifdef ADC3_BASE
 		case ADC3_BASE:	__HAL_RCC_ADC3_CLK_ENABLE(); break;
+#endif
 	}
 }
 
@@ -55,7 +64,9 @@ void AdcOneChannel::clkDisable ( void ) {
 	switch( ( uint32_t )this->adc.Instance ) {
 		case ADC1_BASE:	__HAL_RCC_ADC1_CLK_DISABLE(); break;
 		case ADC2_BASE:	__HAL_RCC_ADC2_CLK_DISABLE(); break;
+#ifdef ADC3_BASE
 		case ADC3_BASE:	__HAL_RCC_ADC3_CLK_DISABLE(); break;
+#endif
 	}
 }
 

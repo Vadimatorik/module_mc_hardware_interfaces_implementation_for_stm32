@@ -7,7 +7,11 @@ namespace McHardwareInterfacesImplementation {
 Uart::Uart( const UartCfg* const cfg, uint32_t countCfg  ) :
 	cfg( cfg ), cfgCount( countCfg ) {
 	this->uart.Init.HwFlowCtl							= UART_HWCONTROL_NONE;
+#ifdef UART_OVERSAMPLING_8
 	this->uart.Init.OverSampling						= UART_OVERSAMPLING_8;
+#elif UART_OVERSAMPLING_16
+	this->uart.Init.OverSampling						= UART_OVERSAMPLING_16;
+#endif
 	this->uart.Init.Parity								= UART_PARITY_NONE;
 	this->uart.Init.StopBits							= UART_STOPBITS_1;
 	this->uart.Init.WordLength							= UART_WORDLENGTH_8B;
@@ -23,7 +27,9 @@ Uart::Uart( const UartCfg* const cfg, uint32_t countCfg  ) :
 		this->uart.hdmatx->Init.MemDataAlignment		= DMA_MDATAALIGN_BYTE;
 		this->uart.hdmatx->Init.Mode					= DMA_NORMAL;
 		this->uart.hdmatx->Init.Priority				= DMA_PRIORITY_HIGH;
+#if defined(STM32F2) || defined(STM32F4)
 		this->uart.hdmatx->Init.FIFOMode				= DMA_FIFOMODE_DISABLE;
+#endif
 	}
 
 	this->uart.obj										= this;
@@ -42,7 +48,9 @@ McHardwareInterfaces::BaseResult Uart::reinit ( uint32_t numberCfg ) {
 	this->uart.Init.Mode								= cfg[ numberCfg ].mode;
 	this->uart.Init.BaudRate							= cfg[ numberCfg ].baudrate;
 	this->uart.hdmatx->Instance							= this->cfg[ numberCfg ].dmaTx;
+#if defined(STM32F2) || defined(STM32F4)
 	this->uart.hdmatx->Init.Channel						= this->cfg[ numberCfg ].dmaTxCh;
+#endif
 
 	if ( cfg[ numberCfg ].dmaTx != nullptr ) {
 		this->uart.hdmatx								= &this->dmaTx;

@@ -25,15 +25,17 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 
 	this->spi.Init.NSS								=	SPI_NSS_SOFT;
 	this->spi.Init.FirstBit							=	SPI_FIRSTBIT_MSB;
-	this->spi.Init.TIMode							=	SPI_TIMODE_DISABLED;
-	this->spi.Init.CRCCalculation					=	SPI_CRCCALCULATION_DISABLED;
+	this->spi.Init.TIMode							=	SPI_TIMODE_DISABLE;
+	this->spi.Init.CRCCalculation					=	SPI_CRCCALCULATION_DISABLE;
 	this->spi.Init.CRCPolynomial					=	0xFF;
 
 	if ( cfg->dmaTx != nullptr ) {
 		this->spi.hdmatx							=	&this->dmaTx;
 		this->spi.hdmatx->Parent					=	&this->spi;
 		this->spi.hdmatx->Instance					=	this->cfg[ numberCfg ].dmaTx;
+#if defined( STM32F2 ) && defined( STM32F4 )
 		this->spi.hdmatx->Init.Channel				=	this->cfg[ numberCfg ].dmaTxCh;
+#endif
 		this->spi.hdmatx->Init.Direction			=	DMA_MEMORY_TO_PERIPH;
 		this->spi.hdmatx->Init.PeriphInc			=	DMA_PINC_DISABLE;
 		this->spi.hdmatx->Init.MemInc				=	DMA_MINC_ENABLE;
@@ -41,14 +43,18 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmatx->Init.MemDataAlignment		=	DMA_MDATAALIGN_BYTE;
 		this->spi.hdmatx->Init.Mode					=	DMA_NORMAL;
 		this->spi.hdmatx->Init.Priority				=	DMA_PRIORITY_HIGH;
+#if defined( STM32F2 ) && defined( STM32F4 )
 		this->spi.hdmatx->Init.FIFOMode				=	DMA_FIFOMODE_DISABLE;
+#endif
 	}
 
 	if ( cfg->dmaRx != nullptr ) {
 		this->spi.hdmarx							=	&this->dmaRx;
 		this->spi.hdmarx->Parent					=	&this->spi;
 		this->spi.hdmarx->Instance					=	this->cfg[ numberCfg ].dmaRx;
+#if defined( STM32F2 ) && defined( STM32F4 )
 		this->spi.hdmarx->Init.Channel				=	this->cfg[ numberCfg ].dmaRxCh;
+#endif
 		this->spi.hdmarx->Init.Direction			=	DMA_PERIPH_TO_MEMORY;
 		this->spi.hdmarx->Init.PeriphInc			=	DMA_PINC_DISABLE;
 		this->spi.hdmarx->Init.MemInc				=	DMA_MINC_ENABLE;
@@ -56,7 +62,9 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmarx->Init.MemDataAlignment		=	DMA_MDATAALIGN_BYTE;
 		this->spi.hdmarx->Init.Mode					=	DMA_NORMAL;
 		this->spi.hdmarx->Init.Priority				=	DMA_PRIORITY_HIGH;
+#if defined( STM32F2 ) && defined( STM32F4 )
 		this->spi.hdmarx->Init.FIFOMode				=	DMA_FIFOMODE_DISABLE;
+#endif
 	}
 
 	this->baudratePrescalerArray					=	this->cfg[ numberCfg ].baudratePrescalerArray;
@@ -261,25 +269,25 @@ void HAL_SPI_TxRxCpltCallback ( SPI_HandleTypeDef *hspi ) {
 bool SpiMaster8Bit::initClkSpi ( void ) {
 	switch ( ( uint32_t )this->spi.Instance ) {
 #ifdef SPI
-	case		SPI_BASE:		 __SPI_CLK_ENABLE();		return true;
+	case		SPI_BASE:		 __HAL_RCC_SPI_CLK_ENABLE();		return true;
 #endif
 #ifdef SPI1
-	case		SPI1_BASE:		__SPI1_CLK_ENABLE();		return true;
+	case		SPI1_BASE:		__HAL_RCC_SPI1_CLK_ENABLE();		return true;
 #endif
 #ifdef SPI2
-	case		SPI2_BASE:		__SPI2_CLK_ENABLE();		return true;
+	case		SPI2_BASE:		__HAL_RCC_SPI2_CLK_ENABLE();		return true;
 #endif
 #ifdef SPI3
-	case		SPI3_BASE:		__SPI3_CLK_ENABLE();		return true;
+	case		SPI3_BASE:		__HAL_RCC_SPI3_CLK_ENABLE();		return true;
 #endif
 #ifdef SPI4
-	case		SPI4_BASE:		__SPI4_CLK_ENABLE();		return true;
+	case		SPI4_BASE:		__HAL_RCC_SPI4_CLK_ENABLE();		return true;
 #endif
 #ifdef SPI5
-	case		SPI5_BASE:		__SPI5_CLK_ENABLE();		return true;
+	case		SPI5_BASE:		__HAL_RCC_SPI5_CLK_ENABLE();		return true;
 #endif
 #ifdef SPI6
-	case		SPI6_BASE:		__SPI6_CLK_ENABLE();		return true;
+	case		SPI6_BASE:		__HAL_RCC_SPI6_CLK_ENABLE();		return true;
 #endif
 	};
 	return false;
