@@ -51,7 +51,7 @@ struct UartCfg {
 	Pin*						de;
 	uint32_t					baudrate;
 	uint32_t					mode;						// UART_MODE_RX/UART_MODE_TX/UART_MODE_TX_RX.
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 	DMA_Stream_TypeDef*			dmaTx;						// Из мерии DMAx_Streamx.
 	uint32_t					dmaTxCh;					// Из серии DMA_CHANNEL_x.
 #elif defined( STM32F1 )

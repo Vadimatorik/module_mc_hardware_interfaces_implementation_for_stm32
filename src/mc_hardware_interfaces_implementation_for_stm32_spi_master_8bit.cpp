@@ -34,7 +34,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmatx							=	&this->dmaTx;
 		this->spi.hdmatx->Parent					=	&this->spi;
 		this->spi.hdmatx->Instance					=	this->cfg[ numberCfg ].dmaTx;
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 		this->spi.hdmatx->Init.Channel				=	this->cfg[ numberCfg ].dmaTxCh;
 #endif
 		this->spi.hdmatx->Init.Direction			=	DMA_MEMORY_TO_PERIPH;
@@ -44,7 +44,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmatx->Init.MemDataAlignment		=	DMA_MDATAALIGN_BYTE;
 		this->spi.hdmatx->Init.Mode					=	DMA_NORMAL;
 		this->spi.hdmatx->Init.Priority				=	DMA_PRIORITY_HIGH;
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 		this->spi.hdmatx->Init.FIFOMode				=	DMA_FIFOMODE_DISABLE;
 #endif
 	}
@@ -53,7 +53,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmarx							=	&this->dmaRx;
 		this->spi.hdmarx->Parent					=	&this->spi;
 		this->spi.hdmarx->Instance					=	this->cfg[ numberCfg ].dmaRx;
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 		this->spi.hdmarx->Init.Channel				=	this->cfg[ numberCfg ].dmaRxCh;
 #endif
 		this->spi.hdmarx->Init.Direction			=	DMA_PERIPH_TO_MEMORY;
@@ -63,7 +63,7 @@ McHardwareInterfaces::BaseResult SpiMaster8Bit::reinit ( uint32_t numberCfg  ) {
 		this->spi.hdmarx->Init.MemDataAlignment		=	DMA_MDATAALIGN_BYTE;
 		this->spi.hdmarx->Init.Mode					=	DMA_NORMAL;
 		this->spi.hdmarx->Init.Priority				=	DMA_PRIORITY_HIGH;
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 		this->spi.hdmarx->Init.FIFOMode				=	DMA_FIFOMODE_DISABLE;
 #endif
 	}

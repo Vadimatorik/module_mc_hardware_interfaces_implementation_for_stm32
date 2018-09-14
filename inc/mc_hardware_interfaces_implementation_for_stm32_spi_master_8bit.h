@@ -63,7 +63,7 @@ struct SpiMaster8BitCfg {
 
 	/// В случае, если DMA не используется (передача и прием на прерываниях),
 	/// то следует указать nullptr.
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 	DMA_Stream_TypeDef*						dmaTx;							/// Из мерии DMAx_Streamx.
 	DMA_Stream_TypeDef*						dmaRx;							/// Из мерии DMAx_Streamx.
 	uint32_t								dmaTxCh;						/// Из серии DMA_CHANNEL_x.

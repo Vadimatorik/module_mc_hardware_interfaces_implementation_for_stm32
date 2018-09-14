@@ -13,7 +13,7 @@ McHardwareInterfaces::BaseResult AdcOneChannel::reinit ( uint32_t numberCfg ) {
 	/// Заполняем HAL-структуру.
 	this->adc.Instance						= this->cfg[ numberCfg ].ADCx;
 
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 	this->adc.Init.ClockPrescaler			= this->cfg[ numberCfg ].clockPrescaler;
 	this->adc.Init.Resolution				= this->cfg[ numberCfg ].resolution;
 #endif
@@ -21,12 +21,12 @@ McHardwareInterfaces::BaseResult AdcOneChannel::reinit ( uint32_t numberCfg ) {
 	this->adc.Init.ScanConvMode				= DISABLE;
 	this->adc.Init.ContinuousConvMode		= ENABLE;
 	this->adc.Init.DiscontinuousConvMode	= DISABLE;
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 	this->adc.Init.ExternalTrigConv			= ADC_SOFTWARE_START;
 	this->adc.Init.ExternalTrigConvEdge		= ADC_EXTERNALTRIGCONVEDGE_NONE;
 #endif
 	this->adc.Init.NbrOfConversion			= 1;
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 	this->adc.Init.DMAContinuousRequests	= DISABLE;
 	this->adc.Init.EOCSelection				= ADC_EOC_SEQ_CONV;
 #endif

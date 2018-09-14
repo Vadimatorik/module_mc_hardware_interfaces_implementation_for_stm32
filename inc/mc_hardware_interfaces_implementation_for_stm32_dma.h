@@ -7,7 +7,7 @@
 
 namespace McHardwareInterfacesImplementation {
 
-#if defined( STM32F2 ) && defined( STM32F4 )
+#if defined( STM32F2 ) || defined( STM32F4 )
 void dmaClkOn ( DMA_Stream_TypeDef* dma);
 void dmaIrqOn ( DMA_Stream_TypeDef* dma, uint32_t prio );
 #endif
