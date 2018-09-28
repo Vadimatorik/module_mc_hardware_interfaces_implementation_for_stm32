@@ -38,6 +38,8 @@ class Wdt {
 
 namespace McHardwareInterfacesImplementation {
 
+#define WDT_TASK_STACK_SIZE						128
+
 struct WdtCfg {
 	const uint8_t	taskPrio;				// Приоритет задачи, сбрасывающий wdt.
 	const uint32_t	runTimeMs;				// Время перезагрузки по сторожевому таймеру.
@@ -66,7 +68,7 @@ private:
 
 	static void task ( void* obj );
 
-	USER_OS_STATIC_STACK_TYPE				taskStack[ 64 ] = { 0 };
+	USER_OS_STATIC_STACK_TYPE				taskStack[ WDT_TASK_STACK_SIZE ] = { 0 };
 	USER_OS_STATIC_TASK_STRUCT_TYPE			taskStruct;
 
 	uint8_t									reboot;

@@ -21,7 +21,7 @@ McHardwareInterfaces::BaseResult Wdt::reinit ( uint32_t cfgNumber ) {
 
 	IWDG->KR	= 0xAAAA;								// Перезагружаем WDT.
 
-	USER_OS_STATIC_TASK_CREATE( this->task, "wdt", 64, ( void* )this, this->cfg->taskPrio, this->taskStack, &this->taskStruct );
+	USER_OS_STATIC_TASK_CREATE( this->task, "wdt", WDT_TASK_STACK_SIZE, ( void* )this, this->cfg->taskPrio, this->taskStack, &this->taskStruct );
 
 	return McHardwareInterfaces::BaseResult::ok;
 }
