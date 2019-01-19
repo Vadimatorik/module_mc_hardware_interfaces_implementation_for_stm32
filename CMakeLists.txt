@@ -36,14 +36,6 @@ if (NOT DEFINED ${PROJECT_NAME}_CFG_H_PATH)
             "The value of the variable <<${PROJECT_NAME}_CFG_H_PATH>> is not specified!")
 endif()
 
-# Путь до submodule с описанием интерфейсов должен быть указан обязательно.
-# Пример:
-# SET (MODULE_MC_HARDWARE_INTERFACES_PATH ${CMAKE_SOURCE_DIR}/bsp/submodule/module_mc_hardware_interfaces)
-if (NOT DEFINED MODULE_MC_HARDWARE_INTERFACES_PATH)
-    message (FATAL_ERROR
-            "The value of the variable <<MODULE_MC_HARDWARE_INTERFACES_PATH>> is not specified!")
-endif()
-
 # Путь до заголовочных файлов работы с аппаратной периферией низкого уровня.
 # Пример:
 # SET (LOW_LEVEL_H_FILES_PATH ${CMAKE_SOURCE_DIR}/bsp/submodule/module_stm32f4_low_level_by_st/inc)
@@ -65,6 +57,11 @@ if (NOT DEFINED USER_OS_PATH)
             "The value of the variable <<USER_OS_PATH>> is not specified!")
 endif()
 
+# Путь до submodule с описанием интерфейсов.
+if (NOT DEFINED MODULE_MC_HARDWARE_INTERFACES_PATH)
+    message (FATAL_ERROR
+            "The value of the variable <<MODULE_MC_HARDWARE_INTERFACES_PATH>> is not specified!")
+endif()
 
 # Для сборки требуется:
 include_directories(
