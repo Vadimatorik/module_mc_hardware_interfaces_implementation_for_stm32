@@ -33,28 +33,29 @@ class TimInterrupt {
 namespace McHardwareInterfacesImplementation {
 
 struct TimInterruptCfg {
-	TIM_TypeDef*					tim;
-	const ClkTimBaseCfg*			const cfg;
-	uint32_t						countCfg;
+    TIM_TypeDef *tim;
+    const ClkTimBaseCfg *const cfg;
+    uint32_t countCfg;
 };
 
 class TimInterrupt : public McHardwareInterfaces::TimInterrupt {
 public:
-	TimInterrupt	(	const TimInterruptCfg*	const cfg	);
-
-	McHardwareInterfaces::BaseResult		reinit							( uint32_t cfgNumber = 0 );
-
-	McHardwareInterfaces::BaseResult		setState						(	bool	state	);
-
-	McHardwareInterfaces::BaseResult		on								( void );
-	void									off								( void );
-
-	void									clearInterruptFlag				( void );
+    TimInterrupt (const TimInterruptCfg *const cfg);
+    
+    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    
+    McHardwareInterfaces::BaseResult setState (bool state);
+    
+    McHardwareInterfaces::BaseResult on (void);
+    
+    void off (void);
+    
+    void clearInterruptFlag (void);
 
 private:
-	const TimInterruptCfg*			const cfg;
-
-	TIM_HandleTypeDef				tim;
+    const TimInterruptCfg *const cfg;
+    
+    TIM_HandleTypeDef tim;
 };
 
 }

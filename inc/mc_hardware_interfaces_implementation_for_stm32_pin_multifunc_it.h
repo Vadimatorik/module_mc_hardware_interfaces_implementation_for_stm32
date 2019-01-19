@@ -34,18 +34,19 @@ namespace McHardwareInterfacesImplementation {
 
 class PinMultifuncIt : public PinMultifunc, public McHardwareInterfaces::PinMultifuncIt {
 public:
-	/// exitPin - GPIO_PIN_x.
-	PinMultifuncIt	(	const PinCfg*		const cfg,
-						uint32_t			cfgCount,
-						uint32_t			exitPin	)
-		: PinMultifunc( cfg, cfgCount ), exitPin( exitPin ) {}
-
-	bool	checkIt			( void );
-	void	clearIt			( void );
+    /// exitPin - GPIO_PIN_x.
+    PinMultifuncIt (const PinCfg *const cfg,
+                    uint32_t cfgCount,
+                    uint32_t exitPin)
+        : PinMultifunc(cfg, cfgCount), exitPin(exitPin) {}
+    
+    bool checkIt (void);
+    
+    void clearIt (void);
 
 private:
-	const uint32_t			exitPin;
-
+    const uint32_t exitPin;
+    
 };
 
 }

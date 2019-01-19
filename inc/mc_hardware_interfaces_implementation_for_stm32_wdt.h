@@ -38,40 +38,42 @@ class Wdt {
 
 namespace McHardwareInterfacesImplementation {
 
-#define WDT_TASK_STACK_SIZE						128
+#define WDT_TASK_STACK_SIZE                        128
 
 struct WdtCfg {
-	const uint8_t	taskPrio;				// Приоритет задачи, сбрасывающий wdt.
-	const uint32_t	runTimeMs;				// Время перезагрузки по сторожевому таймеру.
-											// при номинальном режиме работы системы.
-	const uint32_t	startupTimeMs;			// Время перезагрузки по сторожевому таймеру при запуске системы.
-	const uint32_t	serviceTimeMs;			// Время перезагрузки по сторожевому таймеру
-											// во время сервисных операций (например, стирание и перезапись flash).
+    const uint8_t taskPrio;                // Приоритет задачи, сбрасывающий wdt.
+    const uint32_t runTimeMs;                // Время перезагрузки по сторожевому таймеру.
+    // при номинальном режиме работы системы.
+    const uint32_t startupTimeMs;            // Время перезагрузки по сторожевому таймеру при запуске системы.
+    const uint32_t serviceTimeMs;            // Время перезагрузки по сторожевому таймеру
+    // во время сервисных операций (например, стирание и перезапись flash).
 };
 
 class Wdt : public McHardwareInterfaces::Wdt {
 public:
-	Wdt (	const WdtCfg*		const cfg,
-			uint32_t			cfgCount = 1 )
-		: cfg( cfg ), cfgCount( cfgCount ),
-		  cfgNow( 0 ) {}
-
-	McHardwareInterfaces::BaseResult		reinit			( uint32_t numberCfg = 0 );
-	void									reset			( void );
-	void									resetService	( void );
+    Wdt (const WdtCfg *const cfg,
+         uint32_t cfgCount = 1)
+        : cfg(cfg), cfgCount(cfgCount),
+          cfgNow(0) {}
+    
+    McHardwareInterfaces::BaseResult reinit (uint32_t numberCfg = 0);
+    
+    void reset (void);
+    
+    void resetService (void);
 
 private:
-	const WdtCfg*							const cfg;
-	const uint32_t							cfgCount;
-
-	uint32_t								cfgNow;
-
-	static void task ( void* obj );
-
-	USER_OS_STATIC_STACK_TYPE				taskStack[ WDT_TASK_STACK_SIZE ];
-	USER_OS_STATIC_TASK_STRUCT_TYPE			taskStruct;
-
-	uint8_t									reboot;
+    const WdtCfg *const cfg;
+    const uint32_t cfgCount;
+    
+    uint32_t cfgNow;
+    
+    static void task (void *obj);
+    
+    USER_OS_STATIC_STACK_TYPE taskStack[WDT_TASK_STACK_SIZE];
+    USER_OS_STATIC_TASK_STRUCT_TYPE taskStruct;
+    
+    uint8_t reboot;
 };
 
 }

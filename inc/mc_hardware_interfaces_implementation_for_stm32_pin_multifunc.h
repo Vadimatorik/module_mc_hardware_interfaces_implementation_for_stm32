@@ -34,14 +34,14 @@ namespace McHardwareInterfacesImplementation {
 
 class PinMultifunc : public Pin, public McHardwareInterfaces::PinMultifunc {
 public:
-	PinMultifunc	(	const PinCfg*		const cfg,
-						uint32_t			cfgCount	)
-		: Pin( cfg ), cfgCount( cfgCount ) {}
-
-	bool	reinit			( uint32_t cfgNumber );
+    PinMultifunc (const PinCfg *const cfg,
+                  uint32_t cfgCount)
+        : Pin(cfg), cfgCount(cfgCount) {}
+    
+    bool reinit (uint32_t cfgNumber);
 
 protected:
-	const uint32_t		cfgCount;
+    const uint32_t cfgCount;
 };
 
 }

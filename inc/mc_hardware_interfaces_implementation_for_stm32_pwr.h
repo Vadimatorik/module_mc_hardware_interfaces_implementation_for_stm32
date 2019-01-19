@@ -35,27 +35,28 @@ class Pwr {
 namespace McHardwareInterfacesImplementation {
 
 struct PwrCfg {
-	const PWR_PVDTypeDef			cfg;
+    const PWR_PVDTypeDef cfg;
 };
 
 class Pwr : public McHardwareInterfaces::Pwr {
 public:
-	Pwr (	const PwrCfg*	const cfg,
-			uint32_t		cfgCount = 1 )
-		: cfg( cfg ), cfgCount( cfgCount ) {}
-
-	McHardwareInterfaces::BaseResult	reinit			(	uint32_t cfgNumber = 0	);
-
-	void								pvdEnable		(	void	);
-	void								pvdDisable		(	void	);
-
-	void								irqHandler		(	void	);
+    Pwr (const PwrCfg *const cfg,
+         uint32_t cfgCount = 1)
+        : cfg(cfg), cfgCount(cfgCount) {}
+    
+    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    
+    void pvdEnable (void);
+    
+    void pvdDisable (void);
+    
+    void irqHandler (void);
 
 private:
-	const PwrCfg*			const cfg;
-	const uint32_t			cfgCount;
-
-	uint32_t				cfgNow			=	0;
+    const PwrCfg *const cfg;
+    const uint32_t cfgCount;
+    
+    uint32_t cfgNow = 0;
 };
 
 }

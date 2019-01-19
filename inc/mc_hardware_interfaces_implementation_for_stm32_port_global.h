@@ -35,16 +35,16 @@ namespace McHardwareInterfacesImplementation {
 
 class PortGlobal : public McHardwareInterfaces::PortGlobal {
 public:
-	PortGlobal	(	const PinCfg*		const cfg,
-					uint32_t			cfgCount	)
-		: cfg( cfg ), cfgCount( cfgCount ) {}
-
-	McHardwareInterfaces::BaseResult	reinitAllPorts		( void );
+    PortGlobal (const PinCfg *const cfg,
+                uint32_t cfgCount)
+        : cfg(cfg), cfgCount(cfgCount) {}
+    
+    McHardwareInterfaces::BaseResult reinitAllPorts (void);
 
 private:
-	const PinCfg*				const cfg;
-	const uint32_t				cfgCount;
-
+    const PinCfg *const cfg;
+    const uint32_t cfgCount;
+    
 };
 
 }

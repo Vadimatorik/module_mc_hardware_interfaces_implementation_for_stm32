@@ -4,16 +4,16 @@
 
 namespace McHardwareInterfacesImplementation {
 
-bool PinMultifuncIt::checkIt ( void ) {
-	if ( __HAL_GPIO_EXTI_GET_IT( this->exitPin ) != RESET) {
-		return true;
-	} else {
-		return false;
-	}
+bool PinMultifuncIt::checkIt (void) {
+    if (__HAL_GPIO_EXTI_GET_IT(this->exitPin) != RESET) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-void PinMultifuncIt::clearIt ( void ) {
-	__HAL_GPIO_EXTI_CLEAR_IT( this->exitPin );
+void PinMultifuncIt::clearIt (void) {
+    __HAL_GPIO_EXTI_CLEAR_IT(this->exitPin);
 }
 
 }

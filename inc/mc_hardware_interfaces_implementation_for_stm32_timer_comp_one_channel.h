@@ -34,32 +34,33 @@ class TimCompOneChannel {
 namespace McHardwareInterfacesImplementation {
 
 struct TimCompOneChannelCfg {
-	// Используемый таймер.
-	TIM_TypeDef*					tim;
-
-	const ClkTimBaseCfg*			const cfg;
-	uint32_t						countCfg;
-
-	// Параметры выходного канала.
-	uint8_t							outChannel;		// TIM_CHANNEL_x.
-	uint32_t						polarity;		// TIM_OCPOLARITY_LOW  / TIM_OCPOLARITY_HIGH.
-
+    // Используемый таймер.
+    TIM_TypeDef *tim;
+    
+    const ClkTimBaseCfg *const cfg;
+    uint32_t countCfg;
+    
+    // Параметры выходного канала.
+    uint8_t outChannel;        // TIM_CHANNEL_x.
+    uint32_t polarity;        // TIM_OCPOLARITY_LOW  / TIM_OCPOLARITY_HIGH.
+    
 };
 
 class TimCompOneChannel : public McHardwareInterfaces::TimCompOneChannel {
 public:
-	TimCompOneChannel	(	const TimCompOneChannelCfg*	const cfg	);
-
-	McHardwareInterfaces::BaseResult		reinit					( uint32_t cfgNumber = 0 );
-
-	McHardwareInterfaces::BaseResult		on						( void );
-	void									off						( void );
+    TimCompOneChannel (const TimCompOneChannelCfg *const cfg);
+    
+    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    
+    McHardwareInterfaces::BaseResult on (void);
+    
+    void off (void);
 
 private:
-	const TimCompOneChannelCfg*		const cfg;
-
-	TIM_HandleTypeDef				tim;
-	TIM_OC_InitTypeDef				timCh;
+    const TimCompOneChannelCfg *const cfg;
+    
+    TIM_HandleTypeDef tim;
+    TIM_OC_InitTypeDef timCh;
 };
 
 }

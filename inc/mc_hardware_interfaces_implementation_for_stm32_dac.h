@@ -37,27 +37,27 @@ class Dac {
 namespace McHardwareInterfacesImplementation {
 
 struct DacCfg {
-	uint32_t			buffer;				// DAC_OUTPUTBUFFER_ENABLE/DAC_OUTPUTBUFFER_DISABLE.
-	uint32_t			defaultValue;		// Значение, выставляемое на выводы каналов Dac после инициализации.
+    uint32_t			buffer;				// DAC_OUTPUTBUFFER_ENABLE/DAC_OUTPUTBUFFER_DISABLE.
+    uint32_t			defaultValue;		// Значение, выставляемое на выводы каналов Dac после инициализации.
 };
 
 class Dac : public McHardwareInterfaces::Dac {
 public:
-	Dac	(	const DacCfg*		const cfg,
-			uint32_t			cfgCount	);
+    Dac	(	const DacCfg*		const cfg,
+            uint32_t			cfgCount	);
 
-	McHardwareInterfaces::BaseResult	reinit			( uint32_t cfgNumber = 0 );
-	McHardwareInterfaces::BaseResult	setValue		( uint32_t channel, uint32_t value );
+    McHardwareInterfaces::BaseResult	reinit			( uint32_t cfgNumber = 0 );
+    McHardwareInterfaces::BaseResult	setValue		( uint32_t channel, uint32_t value );
 
 private:
-	void								clkEnable		( void );
-	void								clkDisable		( void );
+    void								clkEnable		( void );
+    void								clkDisable		( void );
 
-	const DacCfg*					const cfg;
-	const uint32_t					cfgCount;
+    const DacCfg*					const cfg;
+    const uint32_t					cfgCount;
 
-	DAC_HandleTypeDef				dac;
-	DAC_ChannelConfTypeDef			dacChannel;
+    DAC_HandleTypeDef				dac;
+    DAC_ChannelConfTypeDef			dacChannel;
 };
 
 }
