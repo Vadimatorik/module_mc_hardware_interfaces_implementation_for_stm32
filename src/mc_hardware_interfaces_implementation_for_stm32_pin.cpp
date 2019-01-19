@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_pin.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_pin.h"
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 

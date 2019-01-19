@@ -31,7 +31,6 @@ class Pwr {
 #ifdef HAL_PWR_MODULE_ENABLED
 
 #include "mc_hardware_interfaces_pwr.h"
-#include "user_os.h"
 
 namespace McHardwareInterfacesImplementation {
 

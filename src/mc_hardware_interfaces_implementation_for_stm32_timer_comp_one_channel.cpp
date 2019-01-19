@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_timer_comp_one_channel.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_timer_comp_one_channel.h"
 
 #ifdef HAL_TIM_MODULE_ENABLED
 

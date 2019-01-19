@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
 
 #ifdef HAL_TIM_MODULE_ENABLED
 

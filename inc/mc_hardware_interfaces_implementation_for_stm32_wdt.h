@@ -68,7 +68,7 @@ private:
 
 	static void task ( void* obj );
 
-	USER_OS_STATIC_STACK_TYPE				taskStack[ WDT_TASK_STACK_SIZE ] = { 0 };
+	USER_OS_STATIC_STACK_TYPE				taskStack[ WDT_TASK_STACK_SIZE ];
 	USER_OS_STATIC_TASK_STRUCT_TYPE			taskStruct;
 
 	uint8_t									reboot;

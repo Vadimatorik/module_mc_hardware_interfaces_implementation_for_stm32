@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_rcc.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_rcc.h"
 
 #ifdef HAL_RCC_MODULE_ENABLED
 

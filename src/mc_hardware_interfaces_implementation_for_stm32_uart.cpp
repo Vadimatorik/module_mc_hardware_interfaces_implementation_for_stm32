@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_uart.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_uart.h"
 
 #ifdef HAL_UART_MODULE_ENABLED
 

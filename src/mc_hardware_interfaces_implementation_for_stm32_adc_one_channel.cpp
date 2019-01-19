@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_adc_one_channel.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_adc_one_channel.h"
 
 #ifdef HAL_ADC_MODULE_ENABLED
 

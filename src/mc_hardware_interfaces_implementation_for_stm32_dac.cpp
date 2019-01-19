@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_dac.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_dac.h"
 
 #ifdef HAL_DAC_MODULE_ENABLED
 

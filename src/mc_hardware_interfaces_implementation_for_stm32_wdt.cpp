@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_wdt.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_wdt.h"
 
 #ifdef HAL_WWDG_MODULE_ENABLED
 

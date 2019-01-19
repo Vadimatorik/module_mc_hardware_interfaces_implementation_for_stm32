@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_spi_master_8bit.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_spi_master_8bit.h"
 
 #ifdef HAL_SPI_MODULE_ENABLED
 

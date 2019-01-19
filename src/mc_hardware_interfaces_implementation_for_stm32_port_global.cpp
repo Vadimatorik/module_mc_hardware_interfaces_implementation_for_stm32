@@ -1,4 +1,4 @@
-#include "../inc/mc_hardware_interfaces_implementation_for_stm32_port_global.h"
+#include "mc_hardware_interfaces_implementation_for_stm32_port_global.h"
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
