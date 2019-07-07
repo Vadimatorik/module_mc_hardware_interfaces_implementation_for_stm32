@@ -13,9 +13,9 @@ TimInterrupt::TimInterrupt (const TimInterruptCfg *const cfg) : cfg(cfg) {
     this->tim.Init.CounterMode = TIM_COUNTERMODE_UP;
 }
 
-McHardwareInterfaces::BaseResult TimInterrupt::reinit (uint32_t numberCfg) {
+mc_interfaces::res TimInterrupt::reinit (uint32_t numberCfg) {
     if (numberCfg >= this->cfg->countCfg)
-        return McHardwareInterfaces::BaseResult::errInputValue;
+        return mc_interfaces::res::errInputValue;
     
     this->tim.Init.Period = this->cfg->cfg[numberCfg].period;
     this->tim.Init.Prescaler = this->cfg->cfg[numberCfg].prescaler;
@@ -23,17 +23,17 @@ McHardwareInterfaces::BaseResult TimInterrupt::reinit (uint32_t numberCfg) {
     clkTimInit(this->cfg->tim);
     
     if (HAL_TIM_Base_DeInit(&this->tim) != HAL_OK)
-        return McHardwareInterfaces::BaseResult::errInit;
+        return mc_interfaces::res::errInit;
     
     if (HAL_TIM_Base_Init(&this->tim) != HAL_OK)
-        return McHardwareInterfaces::BaseResult::errInit;
+        return mc_interfaces::res::errInit;
     
-    return McHardwareInterfaces::BaseResult::ok;
+    return mc_interfaces::res::ok;
 }
 
-McHardwareInterfaces::BaseResult TimInterrupt::setState (bool state) {
+mc_interfaces::res TimInterrupt::setState (bool state) {
     if (this->tim.State == HAL_TIM_STATE_RESET)
-        return McHardwareInterfaces::BaseResult::errInit;
+        return mc_interfaces::res::errInit;
     
     if (state) {
         HAL_TIM_Base_Start_IT(&this->tim);
@@ -41,16 +41,16 @@ McHardwareInterfaces::BaseResult TimInterrupt::setState (bool state) {
         HAL_TIM_Base_Stop_IT(&this->tim);
     }
     
-    return McHardwareInterfaces::BaseResult::ok;
+    return mc_interfaces::res::ok;
 }
 
-McHardwareInterfaces::BaseResult TimInterrupt::on (void) {
+mc_interfaces::res TimInterrupt::on (void) {
     if (this->tim.State == HAL_TIM_STATE_RESET)
-        return McHardwareInterfaces::BaseResult::errInit;
+        return mc_interfaces::res::errInit;
     
     HAL_TIM_Base_Start_IT(&this->tim);
     
-    return McHardwareInterfaces::BaseResult::ok;
+    return mc_interfaces::res::ok;
 }
 
 void TimInterrupt::off (void) {

@@ -4,16 +4,16 @@
 
 namespace McHardwareInterfacesImplementation {
 
-McHardwareInterfaces::BaseResult Pwr::reinit (uint32_t numberCfg) {
+mc_interfaces::res Pwr::reinit (uint32_t numberCfg) {
     if (numberCfg >= this->cfgCount)
-        return McHardwareInterfaces::BaseResult::errInputValue;
+        return mc_interfaces::res::errInputValue;
     
     __HAL_RCC_PWR_CLK_ENABLE();
     this->cfgNow = numberCfg;
     
     HAL_PWR_ConfigPVD((PWR_PVDTypeDef *)&this->cfg[this->cfgNow].cfg);
     
-    return McHardwareInterfaces::BaseResult::ok;
+    return mc_interfaces::res::ok;
 }
 
 void Pwr::pvdEnable (void) {

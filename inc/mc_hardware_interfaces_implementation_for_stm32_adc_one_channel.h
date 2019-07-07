@@ -47,14 +47,14 @@ struct AdcOneChannelCfg {
     uint32_t samplingTime;                                // ADC_sampling_times
 };
 
-class AdcOneChannel : public McHardwareInterfaces::AdcOneChannel {
+class AdcOneChannel : public mc_interfaces::AdcOneChannel {
 public:
     AdcOneChannel (const AdcOneChannelCfg *const cfg,
                    uint32_t countCfg);
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t numberCfg = 0);
+    mc_interfaces::res reinit (uint32_t numberCfg = 0);
     
-    McHardwareInterfaces::BaseResult startContinuousConversion (void);
+    mc_interfaces::res startContinuousConversion (void);
     
     void stopContinuousConversion (void);
     

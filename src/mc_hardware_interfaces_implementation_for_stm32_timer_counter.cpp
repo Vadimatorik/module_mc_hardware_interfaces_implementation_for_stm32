@@ -13,9 +13,9 @@ TimCounter::TimCounter (const TimCounterCfg *const cfg) : cfg(cfg) {
     this->tim.Init.CounterMode = TIM_COUNTERMODE_UP;
 }
 
-McHardwareInterfaces::BaseResult TimCounter::reinit (uint32_t numberCfg) {
+mc_interfaces::res TimCounter::reinit (uint32_t numberCfg) {
     if (numberCfg >= this->cfg->countCfg)
-        return McHardwareInterfaces::BaseResult::errInputValue;
+        return mc_interfaces::res::errInputValue;
     
     this->tim.Init.Period = this->cfg->cfg[numberCfg].period;
     this->tim.Init.Prescaler = this->cfg->cfg[numberCfg].prescaler;
@@ -23,21 +23,21 @@ McHardwareInterfaces::BaseResult TimCounter::reinit (uint32_t numberCfg) {
     clkTimInit(this->tim.Instance);
     
     if (HAL_TIM_Base_DeInit(&this->tim) != HAL_OK)
-        return McHardwareInterfaces::BaseResult::errInit;
+        return mc_interfaces::res::errInit;
     
     if (HAL_TIM_Base_Init(&this->tim) != HAL_OK)
-        return McHardwareInterfaces::BaseResult::errInit;
+        return mc_interfaces::res::errInit;
     
-    return McHardwareInterfaces::BaseResult::ok;
+    return mc_interfaces::res::ok;
 }
 
-McHardwareInterfaces::BaseResult TimCounter::on (void) {
+mc_interfaces::res TimCounter::on (void) {
     if (this->tim.State == HAL_TIM_STATE_RESET)
-        return McHardwareInterfaces::BaseResult::errInit;
+        return mc_interfaces::res::errInit;
     
     HAL_TIM_Base_Start(&this->tim);
     
-    return McHardwareInterfaces::BaseResult::ok;
+    return mc_interfaces::res::ok;
 }
 
 void TimCounter::off (void) {

@@ -1,12 +1,12 @@
-#include "mc_hardware_interfaces_implementation_for_stm32_wdt.h"
+#include "wdt.h"
 
 #ifdef HAL_WWDG_MODULE_ENABLED
 
 namespace McHardwareInterfacesImplementation {
 
-McHardwareInterfaces::BaseResult Wdt::reinit (uint32_t cfgNumber) {
+mc_interfaces::res Wdt::reinit (uint32_t cfgNumber) {
     if (cfgNumber >= this->cfgCount)
-        return McHardwareInterfaces::BaseResult::errInputValue;
+        return mc_interfaces::res::errInputValue;
     
     this->cfgNow = cfgNumber;
     
@@ -24,7 +24,7 @@ McHardwareInterfaces::BaseResult Wdt::reinit (uint32_t cfgNumber) {
     USER_OS_STATIC_TASK_CREATE(this->task, "wdt", WDT_TASK_STACK_SIZE, (void *)this, this->cfg->taskPrio,
                                this->taskStack, &this->taskStruct);
     
-    return McHardwareInterfaces::BaseResult::ok;
+    return mc_interfaces::res::ok;
 }
 
 void Wdt::reset (void) {

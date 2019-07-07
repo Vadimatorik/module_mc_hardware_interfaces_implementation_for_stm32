@@ -49,13 +49,13 @@ struct TimCounterCfg {
     uint32_t countCfg;
 };
 
-class TimCounter : public McHardwareInterfaces::TimCounter {
+class TimCounter : public mc_interfaces::TimCounter {
 public:
     TimCounter (const TimCounterCfg *const cfg);
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    mc_interfaces::res reinit (uint32_t cfgNumber = 0);
     
-    McHardwareInterfaces::BaseResult on (void);
+    mc_interfaces::res on (void);
     
     void off (void);
     

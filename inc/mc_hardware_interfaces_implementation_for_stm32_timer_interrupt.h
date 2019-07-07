@@ -38,15 +38,15 @@ struct TimInterruptCfg {
     uint32_t countCfg;
 };
 
-class TimInterrupt : public McHardwareInterfaces::TimInterrupt {
+class TimInterrupt : public mc_interfaces::TimInterrupt {
 public:
     TimInterrupt (const TimInterruptCfg *const cfg);
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    mc_interfaces::res reinit (uint32_t cfgNumber = 0);
     
-    McHardwareInterfaces::BaseResult setState (bool state);
+    mc_interfaces::res setState (bool state);
     
-    McHardwareInterfaces::BaseResult on (void);
+    mc_interfaces::res on (void);
     
     void off (void);
     

@@ -38,13 +38,13 @@ struct PwrCfg {
     const PWR_PVDTypeDef cfg;
 };
 
-class Pwr : public McHardwareInterfaces::Pwr {
+class Pwr : public mc_interfaces::Pwr {
 public:
     Pwr (const PwrCfg *const cfg,
          uint32_t cfgCount = 1)
         : cfg(cfg), cfgCount(cfgCount) {}
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    mc_interfaces::res reinit (uint32_t cfgNumber = 0);
     
     void pvdEnable (void);
     

@@ -53,7 +53,7 @@ namespace McHardwareInterfacesImplementation {
 struct SpiMaster8BitCfg {
     SPI_TypeDef *SPIx;
     
-    McHardwareInterfaces::Pin *pinCs;
+    mc_interfaces::Pin *pinCs;
     
     uint32_t clkPolarity;                    /// SPI_Clock_Polarity.
     uint32_t clkPhase;                        /// SPI_Clock_Phase.
@@ -76,36 +76,36 @@ struct SpiMaster8BitCfg {
 
 };
 
-class SpiMaster8Bit : public McHardwareInterfaces::SpiMaster8Bit {
+class SpiMaster8Bit : public mc_interfaces::SpiMaster8Bit {
 public:
     SpiMaster8Bit (const SpiMaster8BitCfg *const cfg,
                    uint32_t cfgCount = 1);
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t numberCfg = 0);
+    mc_interfaces::res reinit (uint32_t numberCfg = 0);
     
-    McHardwareInterfaces::BaseResult on (void);
+    mc_interfaces::res on (void);
     
     void off (void);
     
-    McHardwareInterfaces::BaseResult tx (const uint8_t *const txArray,
+    mc_interfaces::res tx (const uint8_t *const txArray,
                                          uint16_t length = 1,
                                          uint32_t timeoutMs = 100);
     
-    McHardwareInterfaces::BaseResult tx (const uint8_t *const txArray,
+    mc_interfaces::res tx (const uint8_t *const txArray,
                                          uint8_t *rxArray,
                                          uint16_t length = 1,
                                          uint32_t timeoutMs = 100);
     
-    McHardwareInterfaces::BaseResult txOneItem (uint8_t txByte,
+    mc_interfaces::res txOneItem (uint8_t txByte,
                                                 uint16_t count = 1,
                                                 uint32_t timeoutMs = 100);
     
-    McHardwareInterfaces::BaseResult rx (uint8_t *rxArray,
+    mc_interfaces::res rx (uint8_t *rxArray,
                                          uint16_t length = 1,
                                          uint32_t timeoutMs = 100,
                                          uint8_t outValue = 0xFF);
     
-    McHardwareInterfaces::BaseResult setPrescaler (uint32_t prescalerNumber = 0);
+    mc_interfaces::res setPrescaler (uint32_t prescalerNumber = 0);
     
     
     void giveSemaphore (void);        // Отдать симафор из прерывания (внутренняя функция.
@@ -130,7 +130,7 @@ private:
     DMA_HandleTypeDef dmaTx;
     DMA_HandleTypeDef dmaRx;
     
-    McHardwareInterfaces::Pin *cs;
+    mc_interfaces::Pin *cs;
     
     USER_OS_STATIC_MUTEX m = nullptr;
     USER_OS_STATIC_MUTEX_BUFFER mb;

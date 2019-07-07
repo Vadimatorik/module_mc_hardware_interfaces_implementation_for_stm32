@@ -49,14 +49,14 @@ struct WdtCfg {
     // во время сервисных операций (например, стирание и перезапись flash).
 };
 
-class Wdt : public McHardwareInterfaces::Wdt {
+class Wdt : public mc_interfaces::Wdt {
 public:
     Wdt (const WdtCfg *const cfg,
          uint32_t cfgCount = 1)
         : cfg(cfg), cfgCount(cfgCount),
           cfgNow(0) {}
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t numberCfg = 0);
+    mc_interfaces::res reinit (uint32_t numberCfg = 0);
     
     void reset (void);
     

@@ -46,7 +46,7 @@ class Uart {
 
 namespace McHardwareInterfacesImplementation {
 
-struct UartCfg {
+struct uart_cfg {
     USART_TypeDef *uart;
     Pin *de;
     uint32_t baudrate;
@@ -58,46 +58,45 @@ struct UartCfg {
     DMA_Channel_TypeDef*		dmaTx;
 #endif
     uint32_t dmaTxPrio;                    // Приоритет прерывания.
+    void (*byte_handler) (uint8_t byte);
 };
 
-class Uart : public McHardwareInterfaces::Uart {
+class uart : public mc_interfaces::uart {
 public:
-    Uart (const UartCfg *const cfg,
-          uint32_t cfgCount = 1);
-    
-    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
-    
-    McHardwareInterfaces::BaseResult on (void);
-    
+    uart (const uart_cfg *const cfg, uint32_t cfg_num = 1);
+
+public:
+    mc_interfaces::res reinit (uint32_t cfgNumber = 0);
+
+public:
+    mc_interfaces::res on (void);
     void off (void);
+
+public:
+    mc_interfaces::res tx (const uint8_t *const buf, uint16_t len = 1, uint32_t timeout_ms = 100);
+    mc_interfaces::res get_byte (uint8_t *buf);
+    mc_interfaces::res get_byte (uint8_t *buf, uint32_t timeout_ms = 100);
+
+public:
+    void uart_irq_handler (void);
+    void dma_irq_handler (void);
     
-    McHardwareInterfaces::BaseResult tx (const uint8_t *const txArray,
-                                         uint16_t length = 1,
-                                         uint32_t timeoutMs = 100);
-    
-    McHardwareInterfaces::BaseResult getByte (uint8_t *retrunData,
-                                              uint32_t timeoutMs = 100);
-    
-    McHardwareInterfaces::BaseResult getByteWitchout (uint8_t *retrunData);
-    
-    void irqHandler (void);
-    
-    /// Для внутреннего пользования HAL-а.
-    void giveSemaphore (void);
+public:
+    void give_semaphore (void);
 
 private:
     bool clkInit (void);
-    
     bool clkDeinit (void);
 
 private:
-    const UartCfg *const cfg;
-    const uint32_t cfgCount;
+    const uart_cfg *const cfg = nullptr;
+    const uint32_t cfg_num = 0;
     
-    DMA_HandleTypeDef dmaTx;
-    UART_HandleTypeDef uart;
-    USER_OS_STATIC_BIN_SEMAPHORE s = nullptr;
+    DMA_HandleTypeDef d;
+    UART_HandleTypeDef u;
     USER_OS_STATIC_MUTEX m = nullptr;
+    USER_OS_STATIC_BIN_SEMAPHORE s = nullptr;
+
     USER_OS_STATIC_BIN_SEMAPHORE_BUFFER sb;
     USER_OS_STATIC_MUTEX_BUFFER mb;
 };

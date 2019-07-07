@@ -46,13 +46,13 @@ struct TimPwmOneChannelCfg {
     uint32_t polarity;            // TIM_OCPOLARITY_LOW  / TIM_OCPOLARITY_HIGH.
 };
 
-class TimPwmOneChannel : public McHardwareInterfaces::TimPwmOneChannel {
+class TimPwmOneChannel : public mc_interfaces::TimPwmOneChannel {
 public:
     TimPwmOneChannel (const TimPwmOneChannelCfg *const cfg);
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    mc_interfaces::res reinit (uint32_t cfgNumber = 0);
     
-    McHardwareInterfaces::BaseResult on (void);
+    mc_interfaces::res on (void);
     
     void off (void);
     

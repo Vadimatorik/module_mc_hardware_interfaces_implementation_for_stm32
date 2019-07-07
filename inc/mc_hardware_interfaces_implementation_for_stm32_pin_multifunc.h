@@ -32,7 +32,7 @@ class PinMultifunc {
 
 namespace McHardwareInterfacesImplementation {
 
-class PinMultifunc : public Pin, public McHardwareInterfaces::PinMultifunc {
+class PinMultifunc : public Pin, public mc_interfaces::PinMultifunc {
 public:
     PinMultifunc (const PinCfg *const cfg,
                   uint32_t cfgCount)

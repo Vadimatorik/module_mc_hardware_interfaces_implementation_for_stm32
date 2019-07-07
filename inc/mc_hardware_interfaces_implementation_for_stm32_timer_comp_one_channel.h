@@ -46,13 +46,13 @@ struct TimCompOneChannelCfg {
     
 };
 
-class TimCompOneChannel : public McHardwareInterfaces::TimCompOneChannel {
+class TimCompOneChannel : public mc_interfaces::TimCompOneChannel {
 public:
     TimCompOneChannel (const TimCompOneChannelCfg *const cfg);
     
-    McHardwareInterfaces::BaseResult reinit (uint32_t cfgNumber = 0);
+    mc_interfaces::res reinit (uint32_t cfgNumber = 0);
     
-    McHardwareInterfaces::BaseResult on (void);
+    mc_interfaces::res on (void);
     
     void off (void);
 

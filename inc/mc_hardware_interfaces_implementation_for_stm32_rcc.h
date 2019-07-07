@@ -72,16 +72,16 @@ struct RccCfg {
     uint32_t fLatency;
 };
 
-class Rcc : public McHardwareInterfaces::Rcc {
+class Rcc : public mc_interfaces::Rcc {
 public:
     Rcc (const RccCfg *const cfg,
          uint32_t cfgCount)
         : cfg(cfg), cfgCount(cfgCount) {}
 
 public:
-    McHardwareInterfaces::RccResult setCfg (const uint32_t cfgNumberSet = 0);
+    mc_interfaces::RccResult setCfg (const uint32_t cfgNumberSet = 0);
     
-    McHardwareInterfaces::RccResult getCfgNumber (uint32_t &cfgNumber);
+    mc_interfaces::RccResult getCfgNumber (uint32_t &cfgNumber);
 
 private:
     const RccCfg *const cfg;

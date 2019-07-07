@@ -61,7 +61,7 @@ struct PinCfg {
     const GPIO_InitTypeDef init;
 };
 
-class Pin : public McHardwareInterfaces::Pin {
+class Pin : public mc_interfaces::Pin {
 public:
     Pin (const PinCfg *const cfg) : cfg(cfg) {}
     

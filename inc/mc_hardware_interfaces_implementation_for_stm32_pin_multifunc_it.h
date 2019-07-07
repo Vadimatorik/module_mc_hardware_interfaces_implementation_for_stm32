@@ -32,7 +32,7 @@ class PinMultifuncIt {
 
 namespace McHardwareInterfacesImplementation {
 
-class PinMultifuncIt : public PinMultifunc, public McHardwareInterfaces::PinMultifuncIt {
+class PinMultifuncIt : public PinMultifunc, public mc_interfaces::PinMultifuncIt {
 public:
     /// exitPin - GPIO_PIN_x.
     PinMultifuncIt (const PinCfg *const cfg,

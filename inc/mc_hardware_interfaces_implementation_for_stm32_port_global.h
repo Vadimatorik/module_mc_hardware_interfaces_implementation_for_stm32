@@ -33,13 +33,13 @@ class PortGlobal {
 
 namespace McHardwareInterfacesImplementation {
 
-class PortGlobal : public McHardwareInterfaces::PortGlobal {
+class PortGlobal : public mc_interfaces::PortGlobal {
 public:
     PortGlobal (const PinCfg *const cfg,
                 uint32_t cfgCount)
         : cfg(cfg), cfgCount(cfgCount) {}
     
-    McHardwareInterfaces::BaseResult reinitAllPorts (void);
+    mc_interfaces::res reinitAllPorts (void);
 
 private:
     const PinCfg *const cfg;
