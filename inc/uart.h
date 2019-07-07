@@ -59,6 +59,7 @@ struct uart_cfg {
 #endif
     uint32_t dmaTxPrio;                    // Приоритет прерывания.
     void (*byte_handler) (uint8_t byte);
+    bool echo;
 };
 
 class uart : public mc_interfaces::uart {

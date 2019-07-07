@@ -91,7 +91,9 @@ mc_interfaces::res uart::on (void) {
         return mc_interfaces::res::errInit;
     
     __HAL_UART_ENABLE(&this->u);
-    //__HAL_UART_ENABLE_IT(&this->u, UART_IT_RXNE|UART_IT_PE|UART_IT_ERR);
+    __HAL_UART_ENABLE_IT(&this->u, UART_IT_RXNE);
+    __HAL_UART_ENABLE_IT(&this->u, UART_IT_PE);
+    __HAL_UART_ENABLE_IT(&this->u, UART_IT_ERR);
     return mc_interfaces::res::ok;
 }
 
@@ -167,7 +169,11 @@ mc_interfaces::res uart::get_byte (uint8_t *buf,
 void uart::uart_irq_handler (void) {
     if (this->cfg->byte_handler) {
         if (__HAL_UART_GET_FLAG(&this->u, UART_FLAG_RXNE)) {
-            this->cfg->byte_handler(this->u.Instance->DR);
+            uint8_t data = this->u.Instance->DR;
+            this->cfg->byte_handler(data);
+            if (this->cfg->echo) {
+                this->u.Instance->DR = data;
+            }
         }
     }
 
