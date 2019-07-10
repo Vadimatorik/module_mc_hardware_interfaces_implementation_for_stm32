@@ -1,11 +1,11 @@
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_DMA_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 #if defined( STM32F2 ) || defined( STM32F4 )
 

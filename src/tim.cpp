@@ -1,8 +1,8 @@
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 // Включаем тактирование SPI.
 void clkTimInit (TIM_TypeDef *tim) {

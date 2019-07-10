@@ -1,8 +1,8 @@
-#include "timer_pwm_one_channel.h"
+#include "tim_pwm_one_ch.h"
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 extern void clkTimInit (TIM_TypeDef *tim);
 

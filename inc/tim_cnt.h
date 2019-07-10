@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.TimCounter ..|> McHardwareInterfaces.TimCounter
+mc.TimCounter ..|> mc.TimCounter
 
 class TimCounter {
 	{field}-	const ClkTimBaseCfg*		const cfg
@@ -24,13 +24,13 @@ class TimCounter {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_timer_counter.h"
+#include "mc_tim_cnt.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct ClkTimBaseCfg {
     const uint32_t period;                    // 0..0xFFFF или 0..0xFFFFFFFF
@@ -52,9 +52,9 @@ struct TimCounterCfg {
 class TimCounter : public mc_interfaces::TimCounter {
 public:
     TimCounter (const TimCounterCfg *const cfg);
-    
+
     mc_interfaces::res reinit (uint32_t cfgNumber = 0);
-    
+
     mc_interfaces::res on (void);
     
     void off (void);

@@ -1,8 +1,8 @@
-#include "mc_hardware_interfaces_implementation_for_stm32_adc_one_channel.h"
+#include "adc_one_ch.h"
 
 #ifdef HAL_ADC_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 AdcOneChannel::AdcOneChannel (const AdcOneChannelCfg *const cfg, const uint32_t countCfg) :
     cfg(cfg), countCfg(countCfg) {}

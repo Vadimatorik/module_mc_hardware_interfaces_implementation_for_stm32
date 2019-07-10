@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.Wdt ..|> McHardwareInterfaces.Wdt
+mc.Wdt ..|> mc.Wdt
 
 class Wdt {
 	{field}-	const WdtCfg*					const cfg
@@ -29,14 +29,14 @@ class Wdt {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_WWDG_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_wdt.h"
+#include "mc_wdt.h"
 #include "user_os.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 #define WDT_TASK_STACK_SIZE                        128
 

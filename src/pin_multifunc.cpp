@@ -1,8 +1,8 @@
-#include "mc_hardware_interfaces_implementation_for_stm32_pin_multifunc.h"
+#include "pin_multifunc.h"
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 bool PinMultifunc::reinit (uint32_t cfgNumber) {
     if (cfgNumber >= this->cfgCount) return false;

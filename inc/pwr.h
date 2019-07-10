@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.Pwr ..|> McHardwareInterfaces.Pwr
+mc.Pwr ..|> mc.Pwr
 
 class Pwr {
 	{field}-	const PwrCfg*		const cfg
@@ -26,13 +26,13 @@ class Pwr {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_PWR_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_pwr.h"
+#include "mc_pwr.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct PwrCfg {
     const PWR_PVDTypeDef cfg;

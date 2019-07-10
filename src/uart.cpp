@@ -4,7 +4,7 @@
 
 #ifdef HAL_UART_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 uart::uart (const uart_cfg *const cfg, uint32_t cfg_num) :
     cfg(cfg), cfg_num(cfg_num) {

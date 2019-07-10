@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.PortGlobal ..|> McHardwareInterfaces.PortGlobal
+mc.PortGlobal ..|> mc.PortGlobal
 
 class PortGlobal {
 	{field}-	const PinCfg*			const cfg
@@ -23,15 +23,15 @@ class PortGlobal {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
-#include <mc_hardware_interfaces_port_global.h>
+#include <mc_port_global.h>
 
-#include "mc_hardware_interfaces_implementation_for_stm32_pin.h"
+#include "pin.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 class PortGlobal : public mc_interfaces::PortGlobal {
 public:

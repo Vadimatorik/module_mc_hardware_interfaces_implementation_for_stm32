@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.Rcc ..|> McHardwareInterfaces.Rcc
+mc.Rcc ..|> mc.Rcc
 
 class Rcc {
 	{field}-	const RccCfg*				const cfg
@@ -24,7 +24,7 @@ class Rcc {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #if defined( HAL_RCC_MODULE_ENABLED ) && defined ( HAL_FLASH_MODULE_ENABLED )
 
@@ -62,9 +62,9 @@ class Rcc {
                                         RCC_CLOCKTYPE_PCLK1 |            \
                                         RCC_CLOCKTYPE_PCLK2
 
-#include "mc_hardware_interfaces_rcc.h"
+#include "mc_clk.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct RccCfg {
     RCC_OscInitTypeDef osc;
@@ -72,7 +72,7 @@ struct RccCfg {
     uint32_t fLatency;
 };
 
-class Rcc : public mc_interfaces::Rcc {
+class Rcc : public mc_interfaces::clk {
 public:
     Rcc (const RccCfg *const cfg,
          uint32_t cfgCount)

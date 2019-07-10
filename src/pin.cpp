@@ -1,8 +1,8 @@
-#include "mc_hardware_interfaces_implementation_for_stm32_pin.h"
+#include "pin.h"
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 void gpioClkEn (const GPIO_TypeDef *GPIOx) {
     switch ((uint32_t)GPIOx) {

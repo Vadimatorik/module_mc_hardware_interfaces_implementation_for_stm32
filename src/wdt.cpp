@@ -2,7 +2,7 @@
 
 #ifdef HAL_WWDG_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 mc_interfaces::res Wdt::reinit (uint32_t cfgNumber) {
     if (cfgNumber >= this->cfgCount)

@@ -1,8 +1,8 @@
-#include "mc_hardware_interfaces_implementation_for_stm32_pwr.h"
+#include "pwr.h"
 
 #ifdef HAL_PWR_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 mc_interfaces::res Pwr::reinit (uint32_t numberCfg) {
     if (numberCfg >= this->cfgCount)

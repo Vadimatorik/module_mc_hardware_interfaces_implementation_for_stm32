@@ -1,8 +1,8 @@
-#include "mc_hardware_interfaces_implementation_for_stm32_rcc.h"
+#include "clk.h"
 
 #ifdef HAL_RCC_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 mc_interfaces::RccResult Rcc::setCfg (const uint32_t numberCfg) {
     if (numberCfg >= this->cfgCount)

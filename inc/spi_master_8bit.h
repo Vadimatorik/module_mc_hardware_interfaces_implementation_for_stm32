@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.SpiMaster8Bit ..|> McHardwareInterfaces.SpiMaster8Bit
+mc.SpiMaster8Bit ..|> mc.SpiMaster8Bit
 
 class SpiMaster8Bit {
 	{field}-	const SpiMaster8BitCfg*				const cfg
@@ -39,20 +39,20 @@ class SpiMaster8Bit {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_SPI_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_implementation_for_stm32_dma.h"
+#include "dma.h"
 #include "user_os.h"
-#include "mc_hardware_interfaces_spi_master_8bit.h"
-#include "mc_hardware_interfaces_implementation_for_stm32_pin.h"
+#include "mc_spi_master_8bit.h"
+#include "mc_pin.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct SpiMaster8BitCfg {
     SPI_TypeDef *SPIx;
-    
+
     mc_interfaces::Pin *pinCs;
     
     uint32_t clkPolarity;                    /// SPI_Clock_Polarity.

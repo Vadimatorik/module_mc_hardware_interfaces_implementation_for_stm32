@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.Pin ..|> McHardwareInterfaces.Pin
+mc.Pin ..|> mc.Pin
 
 class Pin {
 	{field}-	const PinCfg*		const cfg;
@@ -22,11 +22,11 @@ class Pin {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_pin.h"
+#include "mc_pin.h"
 
 #define PIN_COUNT(x) sizeof(x)/sizeof(x[0])
 
@@ -54,7 +54,7 @@ class Pin {
         .Speed        =    GPIO_SPEED_FREQ_VERY_HIGH,    \
         .Alternate    =    0
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct PinCfg {
     const GPIO_TypeDef *const GPIOx;

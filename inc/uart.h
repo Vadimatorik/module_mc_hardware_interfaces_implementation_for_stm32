@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.Uart ..|> McHardwareInterfaces.Uart
+mc.Uart ..|> mc.Uart
 
 class Uart {
 	{field}-	const UartCfg*						const cfg
@@ -35,16 +35,16 @@ class Uart {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_UART_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_implementation_for_stm32_dma.h"
-#include "mc_hardware_interfaces_implementation_for_stm32_pin.h"
-#include "mc_hardware_interfaces_uart.h"
+#include "dma.h"
+#include "pin.h"
+#include "mc_uart.h"
 #include "user_os.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct uart_cfg {
     USART_TypeDef *uart;

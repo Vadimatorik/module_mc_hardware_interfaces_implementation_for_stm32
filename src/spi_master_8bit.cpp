@@ -1,10 +1,10 @@
 #include <string.h>
 
-#include "mc_hardware_interfaces_implementation_for_stm32_spi_master_8bit.h"
+#include "spi_master_8bit.h"
 
 #ifdef HAL_SPI_MODULE_ENABLED
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 SpiMaster8Bit::SpiMaster8Bit (const SpiMaster8BitCfg *const cfg, const uint32_t countCfg) :
     cfg(cfg), cfgCount(countCfg) {

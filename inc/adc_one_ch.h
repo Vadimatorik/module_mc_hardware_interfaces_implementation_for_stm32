@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.AdcOneChannel ..|> McHardwareInterfaces.AdcOneChannel
+mc.AdcOneChannel ..|> mc.AdcOneChannel
 
 class AdcOneChannel {
 	{field}-	const AdcOneChannelCfg*		const cfg
@@ -30,13 +30,13 @@ class AdcOneChannel {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_ADC_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_adc_one_channel.h"
+#include "mc_adc_one_channel.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct AdcOneChannelCfg {
     ADC_TypeDef *ADCx;

@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.TimCompOneChannel ..|> McHardwareInterfaces.TimCompOneChannel
+mc.TimCompOneChannel ..|> mc.TimCompOneChannel
 
 class TimCompOneChannel {
 	{field}-	const TimCompOneChannelCfg*	const cfg
@@ -24,14 +24,15 @@ class TimCompOneChannel {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_implementation_for_stm32_timer_counter.h"
-#include "mc_hardware_interfaces_timer_comp_one_channel.h"
+#include "mc_tim_cnt.h"
+#include "tim_cnt.h"
+#include "mc_tim_comp_one_ch.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct TimCompOneChannelCfg {
     // Используемый таймер.
@@ -49,9 +50,9 @@ struct TimCompOneChannelCfg {
 class TimCompOneChannel : public mc_interfaces::TimCompOneChannel {
 public:
     TimCompOneChannel (const TimCompOneChannelCfg *const cfg);
-    
+
     mc_interfaces::res reinit (uint32_t cfgNumber = 0);
-    
+
     mc_interfaces::res on (void);
     
     void off (void);

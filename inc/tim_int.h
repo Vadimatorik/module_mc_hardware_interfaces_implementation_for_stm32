@@ -2,9 +2,9 @@
 
 @startuml
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
-McHardwareInterfacesImplementation.TimInterrupt ..|> McHardwareInterfaces.TimInterrupt
+mc.TimInterrupt ..|> mc.TimInterrupt
 
 class TimInterrupt {
 	{field}-	const TimInterruptCfg*			const cfg
@@ -23,14 +23,14 @@ class TimInterrupt {
 
 #ifdef __cplusplus
 
-#include "mc_hardware_interfaces_implementation_for_stm32_platform.h"
+#include "platform.h"
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
-#include "mc_hardware_interfaces_implementation_for_stm32_timer_counter.h"
-#include "mc_hardware_interfaces_timer_interrupt.h"
+#include "tim_cnt.h"
+#include "mc_tim_int.h"
 
-namespace McHardwareInterfacesImplementation {
+namespace mc {
 
 struct TimInterruptCfg {
     TIM_TypeDef *tim;
