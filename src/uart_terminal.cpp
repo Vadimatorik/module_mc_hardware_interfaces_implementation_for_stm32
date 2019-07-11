@@ -48,6 +48,8 @@ void uart_terminal::thread (void *obj) {
         }
 
         o->tx(buf, i, 100);
+
+        o->cfg->byte_handler(b_char);
     }
 }
 
@@ -55,9 +57,8 @@ void uart_terminal::uart_irq_handler (void) {
     if (this->cfg->byte_handler) {
         if (__HAL_UART_GET_FLAG(&this->u, UART_FLAG_RXNE)) {
             uint8_t data = this->u.Instance->DR;
-            static BaseType_t xHigherPrioritTaskWoken = pdFALSE;
+            static BaseType_t xHigherPrioritTaskWoken = pdTRUE;
             USER_OS_QUEUE_SEND_TO_BACK(this->q_answer, &data, &xHigherPrioritTaskWoken);
-            this->cfg->byte_handler(data);
         }
     }
 
