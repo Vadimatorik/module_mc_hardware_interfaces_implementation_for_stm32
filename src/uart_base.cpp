@@ -188,7 +188,7 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef *huart) {
 // Private.
 void uart_base::give_semaphore (void) {
     if (this->s) {
-        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+        BaseType_t xHigherPriorityTaskWoken = pdTRUE;
         USER_OS_GIVE_BIN_SEMAPHORE_FROM_ISR (this->s, &xHigherPriorityTaskWoken);
     }
 }

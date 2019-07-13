@@ -21,44 +21,50 @@ uart_terminal::uart_terminal (const uart_cfg *const cfg, uint32_t cfg_num, uint3
 void uart_terminal::thread (void *obj) {
     auto *o = reinterpret_cast<uart_terminal*>(obj);
 
-    //Буфер должен выдерживать даже если вся очередь будет в \n.
-    uint8_t buf[30] = {0};
+
     while(true) {
         uint32_t i = 0;
         uint8_t  b_char = 0;
         USER_OS_QUEUE_RECEIVE(o->q_answer, &b_char, portMAX_DELAY);
         if (b_char != '\r') {
-            buf[i++] = b_char;
+            o->buf_repack_answer[i++] = b_char;
         } else {
-            buf[i++] = '\n';
-            buf[i++] = '\r';
+            o->buf_repack_answer[i++] = '\n';
+            o->buf_repack_answer[i++] = '\r';
         }
 
-        for (;i < sizeof(buf); i++) {
+        o->cfg->byte_handler(b_char);
+
+        for (;i < sizeof(buf_repack_answer); i++) {
             if (USER_OS_QUEUE_RECEIVE(o->q_answer, &b_char, 10) == pdFALSE) {
                 break;
             }
 
             if (b_char != '\r') {
-                buf[i++] = b_char;
+                o->buf_repack_answer[i++] = b_char;
             } else {
-                buf[i++] = '\n';
-                buf[i++] = '\r';
+                o->buf_repack_answer[i++] = '\n';
+                o->buf_repack_answer[i++] = '\r';
             }
+
+            o->cfg->byte_handler(b_char);
         }
 
-        o->tx(buf, i, 100);
-
-        o->cfg->byte_handler(b_char);
+        o->tx(o->buf_repack_answer, i, 100);
     }
 }
 
 void uart_terminal::uart_irq_handler (void) {
+    static BaseType_t hp = pdFALSE;
+    volatile uint8_t sr = this->u.Instance->SR;
+    uint8_t data = this->u.Instance->DR;
+
     if (this->cfg->byte_handler) {
-        if (__HAL_UART_GET_FLAG(&this->u, UART_FLAG_RXNE)) {
-            uint8_t data = this->u.Instance->DR;
-            static BaseType_t xHigherPrioritTaskWoken = pdTRUE;
-            USER_OS_QUEUE_SEND_TO_BACK(this->q_answer, &data, &xHigherPrioritTaskWoken);
+        if ((sr &UART_FLAG_RXNE) == UART_FLAG_RXNE) {
+            xQueueSendFromISR(this->q_answer, &data, &hp);
+            if (hp == pdTRUE) {
+                taskYIELD();
+            }
         }
     }
 
