@@ -31,6 +31,8 @@ void uart_terminal::thread (void *obj) {
         } else {
             o->buf_repack_answer[i++] = '\n';
             o->buf_repack_answer[i++] = '\r';
+            o->tx(o->buf_repack_answer, i, 100);
+            i = 0;
         }
 
         o->cfg->byte_handler(b_char);
@@ -45,6 +47,8 @@ void uart_terminal::thread (void *obj) {
             } else {
                 o->buf_repack_answer[i++] = '\n';
                 o->buf_repack_answer[i++] = '\r';
+                o->tx(o->buf_repack_answer, i, 100);
+                i = 0;
             }
 
             o->cfg->byte_handler(b_char);
