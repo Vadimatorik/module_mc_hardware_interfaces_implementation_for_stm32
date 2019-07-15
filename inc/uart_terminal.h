@@ -19,6 +19,9 @@ private:
     static void thread (void *obj);
 
 private:
+    void char_parser (char c, uint32_t &i);
+
+private:
     static const uint32_t TB_THREAD_SIZE = 200;
     USER_OS_STATIC_STACK_TYPE tb_thread[TB_THREAD_SIZE] = {0};
     USER_OS_STATIC_TASK_STRUCT_TYPE ts_thread;
@@ -29,6 +32,11 @@ private:
     static const uint32_t Q_ITEM_SIZE = sizeof(char);
     uint8_t qb[Q_LEN * Q_ITEM_SIZE] = {0};
     USER_OS_STATIC_QUEUE_STRUCT qs;
+
+private:
+    const uint8_t BACK_SPACE_8 = 8;
+    const uint8_t BACK_SPACE_127 = 127;
+    int input_pos = 0;
 
 private:
     // 255 на строку + 0-терминатор

@@ -17,6 +17,29 @@ uart_terminal::uart_terminal (const uart_cfg *const cfg, uint32_t cfg_num, uint3
     this->q_answer = USER_OS_STATIC_QUEUE_CREATE(Q_LEN, Q_ITEM_SIZE, this->qb, &this->qs);
 }
 
+void uart_terminal::char_parser (char c, uint32_t &i) {
+    if (c != '\r') {
+        if ((c == this->BACK_SPACE_8) || (c == this->BACK_SPACE_127)) {
+            if (this->input_pos > 0) {
+                this->input_pos--;
+                this->buf_repack_answer[i++] = c;
+                this->cfg->byte_handler(c);
+                return;
+            }
+        } else {
+            this->buf_repack_answer[i++] = c;
+            this->input_pos++;
+            this->cfg->byte_handler(c);
+        }
+    } else {
+        this->buf_repack_answer[i++] = '\n';
+        this->buf_repack_answer[i++] = '\r';
+        this->tx(this->buf_repack_answer, i, 100);
+        i = 0;
+        this->input_pos = 0;
+        this->cfg->byte_handler(c);
+    }
+}
 
 void uart_terminal::thread (void *obj) {
     auto *o = reinterpret_cast<uart_terminal*>(obj);
@@ -26,32 +49,14 @@ void uart_terminal::thread (void *obj) {
         uint32_t i = 0;
         uint8_t  b_char = 0;
         USER_OS_QUEUE_RECEIVE(o->q_answer, &b_char, portMAX_DELAY);
-        if (b_char != '\r') {
-            o->buf_repack_answer[i++] = b_char;
-        } else {
-            o->buf_repack_answer[i++] = '\n';
-            o->buf_repack_answer[i++] = '\r';
-            o->tx(o->buf_repack_answer, i, 100);
-            i = 0;
-        }
-
-        o->cfg->byte_handler(b_char);
+        o->char_parser(b_char, i);
 
         for (;i < sizeof(buf_repack_answer); i++) {
             if (USER_OS_QUEUE_RECEIVE(o->q_answer, &b_char, 10) == pdFALSE) {
                 break;
             }
 
-            if (b_char != '\r') {
-                o->buf_repack_answer[i++] = b_char;
-            } else {
-                o->buf_repack_answer[i++] = '\n';
-                o->buf_repack_answer[i++] = '\r';
-                o->tx(o->buf_repack_answer, i, 100);
-                i = 0;
-            }
-
-            o->cfg->byte_handler(b_char);
+            o->char_parser(b_char, i);
         }
 
         o->tx(o->buf_repack_answer, i, 100);
