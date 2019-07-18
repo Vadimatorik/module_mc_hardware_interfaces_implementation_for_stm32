@@ -14,7 +14,7 @@ SpiMaster8Bit::SpiMaster8Bit (const SpiMaster8BitCfg *const cfg, const uint32_t 
 }
 
 mc_interfaces::res SpiMaster8Bit::reinit (uint32_t numberCfg) {
-    if (numberCfg >= this->cfgCount) return mc_interfaces::res::errInputValue;
+    if (numberCfg >= this->cfgCount) return mc_interfaces::res::err_input_value;
     
     this->spi.Instance = cfg->SPIx;
     this->spi.Init.Mode = SPI_MODE_MASTER;
@@ -72,20 +72,20 @@ mc_interfaces::res SpiMaster8Bit::reinit (uint32_t numberCfg) {
     this->numberBaudratePrescalerCfg = this->cfg[numberCfg].numberBaudratePrescalerCfg;
     
     if (this->initClkSpi() == false)
-        return mc_interfaces::res::errInit;                // Включаем тактирование SPI.
+        return mc_interfaces::res::err_init;                // Включаем тактирование SPI.
     
     if (this->initSpi() == false)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
     this->cs = this->cfg[numberCfg].pinCs;
     
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 mc_interfaces::res SpiMaster8Bit::on (void) {
-    if (this->spi.State == HAL_SPI_STATE_RESET) return mc_interfaces::res::errInit;
+    if (this->spi.State == HAL_SPI_STATE_RESET) return mc_interfaces::res::err_init;
     __HAL_SPI_ENABLE(&this->spi);
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 void SpiMaster8Bit::off (void) {
@@ -97,7 +97,7 @@ mc_interfaces::res SpiMaster8Bit::tx (const uint8_t *const txArray,
                                                     uint32_t timeoutMs) {
     USER_OS_TAKE_MUTEX(this->m, portMAX_DELAY);
     
-    mc_interfaces::res rv = mc_interfaces::res::errTimeOut;
+    mc_interfaces::res rv = mc_interfaces::res::err_timeout;
     USER_OS_TAKE_BIN_SEMAPHORE (this->s, 0);
     
     if (this->cs != nullptr)
@@ -108,7 +108,7 @@ mc_interfaces::res SpiMaster8Bit::tx (const uint8_t *const txArray,
     }
     
     if (USER_OS_TAKE_BIN_SEMAPHORE (this->s, timeoutMs) == pdTRUE) {
-        rv = mc_interfaces::res::ok;
+        rv = mc_interfaces::res::err_ok;
     }
     
     if (this->cs != nullptr)
@@ -126,7 +126,7 @@ mc_interfaces::res SpiMaster8Bit::tx (const uint8_t *const txArray,
     USER_OS_TAKE_MUTEX(this->m, portMAX_DELAY);
     USER_OS_TAKE_BIN_SEMAPHORE (this->s, 0);
     
-    mc_interfaces::res rv = mc_interfaces::res::errTimeOut;
+    mc_interfaces::res rv = mc_interfaces::res::err_timeout;
     
     if (this->cs != nullptr)
         this->cs->set(0);
@@ -138,7 +138,7 @@ mc_interfaces::res SpiMaster8Bit::tx (const uint8_t *const txArray,
     }
     
     if (USER_OS_TAKE_BIN_SEMAPHORE (this->s, timeoutMs) == pdTRUE) {
-        rv = mc_interfaces::res::ok;
+        rv = mc_interfaces::res::err_ok;
     }
     
     if (this->cs != nullptr)
@@ -154,7 +154,7 @@ mc_interfaces::res SpiMaster8Bit::txOneItem (uint8_t txByte,
                                                            uint32_t timeoutMs) {
     USER_OS_TAKE_MUTEX(this->m, portMAX_DELAY);
     
-    mc_interfaces::res rv = mc_interfaces::res::errTimeOut;
+    mc_interfaces::res rv = mc_interfaces::res::err_timeout;
     USER_OS_TAKE_BIN_SEMAPHORE (this->s, 0);
     
     if (this->cs != nullptr)
@@ -170,7 +170,7 @@ mc_interfaces::res SpiMaster8Bit::txOneItem (uint8_t txByte,
     }
     
     if (USER_OS_TAKE_BIN_SEMAPHORE (this->s, timeoutMs) == pdTRUE) {
-        rv = mc_interfaces::res::ok;
+        rv = mc_interfaces::res::err_ok;
     }
     
     if (this->cs != nullptr)
@@ -188,7 +188,7 @@ mc_interfaces::res SpiMaster8Bit::rx (uint8_t *rxArray,
     USER_OS_TAKE_MUTEX(this->m, portMAX_DELAY);
     USER_OS_TAKE_BIN_SEMAPHORE (this->s, 0);
     
-    mc_interfaces::res rv = mc_interfaces::res::errTimeOut;
+    mc_interfaces::res rv = mc_interfaces::res::err_timeout;
     
     if (this->cs != nullptr)         // Опускаем CS (для того, чтобы "выбрать" устроство).
         this->cs->set(0);
@@ -203,7 +203,7 @@ mc_interfaces::res SpiMaster8Bit::rx (uint8_t *rxArray,
     }
     
     if (USER_OS_TAKE_BIN_SEMAPHORE (this->s, timeoutMs) == pdTRUE) {
-        rv = mc_interfaces::res::ok;
+        rv = mc_interfaces::res::err_ok;
     }
     
     if (this->cs != nullptr)
@@ -223,7 +223,7 @@ void SpiMaster8Bit::irqHandler (void) {
 }
 
 mc_interfaces::res SpiMaster8Bit::setPrescaler (uint32_t prescalerNumber) {
-    if (prescalerNumber >= this->numberBaudratePrescalerCfg) return mc_interfaces::res::errInputValue;
+    if (prescalerNumber >= this->numberBaudratePrescalerCfg) return mc_interfaces::res::err_input_value;
     
     USER_OS_TAKE_MUTEX(this->m, portMAX_DELAY);
     
@@ -232,7 +232,7 @@ mc_interfaces::res SpiMaster8Bit::setPrescaler (uint32_t prescalerNumber) {
     
     USER_OS_GIVE_MUTEX(this->m);
     
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 /*!

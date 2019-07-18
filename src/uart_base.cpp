@@ -46,7 +46,7 @@ uart_base::uart_base (const uart_cfg *const cfg, uint32_t cfg_num) :
 mc_interfaces::res uart_base::reinit (uint32_t numberCfg) {
 
     if (numberCfg >= this->cfg_num)
-        return mc_interfaces::res::errInputValue;
+        return mc_interfaces::res::err_input_value;
     
     this->clkDeinit();
     
@@ -64,7 +64,7 @@ mc_interfaces::res uart_base::reinit (uint32_t numberCfg) {
         dmaClkOn(this->cfg->dmaTx);
         
         if (HAL_DMA_Init(&this->d) != HAL_OK)
-            return mc_interfaces::res::errInit;
+            return mc_interfaces::res::err_init;
         
         dmaIrqOn(this->cfg->dmaTx, cfg[numberCfg].dmaTxPrio);
     }
@@ -75,26 +75,26 @@ mc_interfaces::res uart_base::reinit (uint32_t numberCfg) {
     
     r = HAL_UART_DeInit(&this->u);
     if (r != HAL_OK)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
     r = HAL_UART_Init(&this->u);
     if (r != HAL_OK)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
     if (this->cfg->de != nullptr) this->cfg->de->reset();
     
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 mc_interfaces::res uart_base::on (void) {
     if (this->u.gState == HAL_UART_STATE_RESET)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
     __HAL_UART_ENABLE(&this->u);
     __HAL_UART_ENABLE_IT(&this->u, UART_IT_RXNE);
     __HAL_UART_ENABLE_IT(&this->u, UART_IT_PE);
     __HAL_UART_ENABLE_IT(&this->u, UART_IT_ERR);
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 void uart_base::off (void) {
@@ -115,9 +115,9 @@ mc_interfaces::res uart_base::tx (const uint8_t *const txArray,
         HAL_UART_Transmit_IT(&this->u, (uint8_t *)txArray, len);
     }
     
-    mc_interfaces::res rv = mc_interfaces::res::errTimeOut;
+    mc_interfaces::res rv = mc_interfaces::res::err_timeout;
     if (USER_OS_TAKE_BIN_SEMAPHORE (this->s, timeout_ms) == pdTRUE) {
-        rv = mc_interfaces::res::ok;
+        rv = mc_interfaces::res::err_ok;
     }
     
     if (this->cfg->de != nullptr) this->cfg->de->reset();
@@ -128,37 +128,37 @@ mc_interfaces::res uart_base::tx (const uint8_t *const txArray,
 
 mc_interfaces::res uart_base::get_byte (uint8_t *buf) {
     if (this->u.gState == HAL_UART_STATE_RESET) {
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     }
     
     /// Если есть данные.
     if (__HAL_UART_GET_FLAG(&this->u, UART_FLAG_RXNE)) {
         *buf = this->u.Instance->DR;
-        return mc_interfaces::res::ok;
+        return mc_interfaces::res::err_ok;
     }
     
-    return mc_interfaces::res::errNotData;
+    return mc_interfaces::res::err_not_data;
 }
 
 mc_interfaces::res uart_base::get_byte (uint8_t *buf,
                                    uint32_t timeoutMs) {
     if (this->u.gState == HAL_UART_STATE_RESET) {
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     }
     
     /// Если есть данные.
     if (__HAL_UART_GET_FLAG(&this->u, UART_FLAG_RXNE)) {
         *buf = this->u.Instance->DR;
-        return mc_interfaces::res::ok;
+        return mc_interfaces::res::err_ok;
     }
     
     USER_OS_TAKE_MUTEX(this->m, portMAX_DELAY);
     USER_OS_TAKE_BIN_SEMAPHORE (this->s, 0);
     
-    volatile mc_interfaces::res rv = mc_interfaces::res::errTimeOut;
+    volatile mc_interfaces::res rv = mc_interfaces::res::err_timeout;
     if (USER_OS_TAKE_BIN_SEMAPHORE (this->s, timeoutMs) == pdTRUE) {
         *buf = this->u.Instance->DR;
-        rv = mc_interfaces::res::ok;
+        rv = mc_interfaces::res::err_ok;
     }
     
     USER_OS_GIVE_MUTEX(this->m);

@@ -18,7 +18,7 @@ TimPwmOneChannel::TimPwmOneChannel (const TimPwmOneChannelCfg *const cfg) : cfg(
 
 mc_interfaces::res TimPwmOneChannel::reinit (uint32_t numberCfg) {
     if (numberCfg >= this->cfg->countCfg)
-        return mc_interfaces::res::errInputValue;
+        return mc_interfaces::res::err_input_value;
     
     this->tim.Init.Period = this->cfg->cfg[numberCfg].period;
     this->tim.Init.Prescaler = this->cfg->cfg[numberCfg].prescaler;
@@ -26,24 +26,24 @@ mc_interfaces::res TimPwmOneChannel::reinit (uint32_t numberCfg) {
     clkTimInit(this->cfg->tim);
     
     if (HAL_TIM_PWM_DeInit(&this->tim) != HAL_OK)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
     if (HAL_TIM_PWM_Init(&this->tim) != HAL_OK)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
     if (HAL_TIM_PWM_ConfigChannel(&this->tim, &this->timChannel, this->cfg->outChannel) != HAL_OK)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 mc_interfaces::res TimPwmOneChannel::on (void) {
     if (this->tim.State == HAL_TIM_STATE_RESET)
-        return mc_interfaces::res::errInit;
+        return mc_interfaces::res::err_init;
     
     HAL_TIM_PWM_Start(&this->tim, this->cfg->outChannel);
     
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 void TimPwmOneChannel::off (void) {

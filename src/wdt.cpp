@@ -6,7 +6,7 @@ namespace mc {
 
 mc_interfaces::res Wdt::reinit (uint32_t cfgNumber) {
     if (cfgNumber >= this->cfgCount)
-        return mc_interfaces::res::errInputValue;
+        return mc_interfaces::res::err_input_value;
     
     this->cfgNow = cfgNumber;
     
@@ -24,7 +24,7 @@ mc_interfaces::res Wdt::reinit (uint32_t cfgNumber) {
     USER_OS_STATIC_TASK_CREATE(this->task, "wdt", WDT_TASK_STACK_SIZE, (void *)this, this->cfg->taskPrio,
                                this->taskStack, &this->taskStruct);
     
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 void Wdt::reset (void) {

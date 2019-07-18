@@ -11,7 +11,7 @@ mc_interfaces::res PortGlobal::reinitAllPorts (void) {
         gpioClkEn((const GPIO_TypeDef *)this->cfg[l].GPIOx);
         HAL_GPIO_Init((GPIO_TypeDef *)cfg[l].GPIOx, (GPIO_InitTypeDef *)(&cfg[l].init));
     }
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 }
