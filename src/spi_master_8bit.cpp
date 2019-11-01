@@ -214,7 +214,7 @@ mc_interfaces::res SpiMaster8Bit::rx (uint8_t *rxArray,
     return rv;
 }
 
-void SpiMaster8Bit::irqHandler (void) {
+void SpiMaster8Bit::irq_handler (void) {
     if (this->spi.hdmatx != nullptr)
         HAL_DMA_IRQHandler(&this->dmaTx);
     

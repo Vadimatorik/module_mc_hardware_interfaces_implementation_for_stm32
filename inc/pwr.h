@@ -13,7 +13,7 @@ class Pwr {
 	__Constructor__
 	{method}+	Pwr ( const PwrCfg*	const cfg,\n\tuint32_t		cfgCount = 1 )
 	__Public methods__
-	{method}+	void	irqHandler		( void )
+	{method}+	void	irq_handler		( void )
 }
 
 }
@@ -50,7 +50,7 @@ public:
     
     void pvdDisable (void);
     
-    void irqHandler (void);
+    void irq_handler (void);
 
 private:
     const PwrCfg *const cfg;

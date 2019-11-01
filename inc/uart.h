@@ -15,7 +15,7 @@ public:
     }
 
 public:
-    void uart_irq_handler (void);
+    void uart_irq_handler ();
 
 };
 

@@ -14,7 +14,7 @@ class AdcOneChannel {
 	__Constructor__
 	{method}+	AdcOneChannel	( const AdcOneChannelCfg*		const cfg,\n\t\t\t  uint32_t\t\t\t\t\tcountCfg )
 	__Public methods__
-	{method}+	void	irqHandler		( void )
+	{method}+	void	irq_handler		( void )
 	__Private methods__
 	{method}-	void	clkEnable		( void )
 	{method}-	void	clkDisable		( void )
@@ -60,7 +60,7 @@ public:
     
     uint32_t getMeasurement (void);
     
-    void irqHandler (void);
+    void irq_handler (void);
 
 private:
     void clkEnable (void);

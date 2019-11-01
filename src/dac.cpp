@@ -37,7 +37,7 @@ mc_interfaces::res Dac::reinit ( uint32_t numberCfg ) {
     HAL_DAC_SetValue( &this->dac, DAC_CHANNEL_1,	DAC_ALIGN_12B_R, this->cfg[ numberCfg ].defaultValue );
     HAL_DAC_SetValue( &this->dac, DAC_CHANNEL_2,	DAC_ALIGN_12B_R, this->cfg[ numberCfg ].defaultValue );
 
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 mc_interfaces::res	Dac::setValue ( uint32_t channel, uint32_t value ) {
@@ -52,7 +52,7 @@ mc_interfaces::res	Dac::setValue ( uint32_t channel, uint32_t value ) {
         HAL_DAC_SetValue( &this->dac, DAC_CHANNEL_2,	DAC_ALIGN_12B_R, value );
     }
 
-    return mc_interfaces::res::ok;
+    return mc_interfaces::res::err_ok;
 }
 
 void Dac::clkEnable ( void ) {

@@ -24,7 +24,7 @@ void Pwr::pvdDisable (void) {
     HAL_PWR_DisablePVD();
 }
 
-void Pwr::irqHandler (void) {
+void Pwr::irq_handler (void) {
     HAL_PWR_PVD_IRQHandler();
 }
 

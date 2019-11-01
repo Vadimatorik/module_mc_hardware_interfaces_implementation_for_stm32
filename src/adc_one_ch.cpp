@@ -97,7 +97,7 @@ uint32_t AdcOneChannel::getMeasurement (void) {
     return this->adc.Instance->DR;
 }
 
-void AdcOneChannel::irqHandler (void) {
+void AdcOneChannel::irq_handler (void) {
     this->adc.Instance->SR = 0;
 }
 

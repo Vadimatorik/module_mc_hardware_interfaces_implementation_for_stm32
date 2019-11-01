@@ -23,7 +23,7 @@ class SpiMaster8Bit {
 	{method}+	SpiMaster8Bit	( const SpiMaster8BitCfg*		const cfg,\n\t\t\t  uint32_t\t\t\t\t\tcfgCount	= 1 )
 	__Public methods__
 	{method}+	void	giveSemaphore	( void )
-	{method}+	void	irqHandler		( void )
+	{method}+	void	irq_handler		( void )
 	__Private methods__
 	{method}-	bool	initClkSpi		( void )
 	{method}-	bool	initSpi		( void )
@@ -109,7 +109,7 @@ public:
     
     
     void giveSemaphore (void);        // Отдать симафор из прерывания (внутренняя функция.
-    void irqHandler (void);
+    void irq_handler (void);
 
 private:
     bool initClkSpi (void);        // Включаем тактирование SPI и DMA (если используется).
